@@ -1,5 +1,13 @@
-const multiplicator = (a: number, b: number, printText: string): void => {
-  console.log(printText, a * b);
+import Problem from "./view/problem";
+import UserInput from "./view/user-input";
+
+const main = (): void => {
+  const test: Problem = new Problem();
+  const a: UserInput = new UserInput();
+
+  test.generateProblem(4, 16);
+  console.log(test.getQuestion());
+  a.onSubmit(test);
 };
 
-multiplicator(3, 4, "E");
+main();
