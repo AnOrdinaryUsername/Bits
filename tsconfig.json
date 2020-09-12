@@ -2,7 +2,10 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "sourceMap": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "module": "es6",
     "target": "es5",
     "jsx": "react",
