@@ -14,24 +14,31 @@
     <link href="styles/main.css" rel="stylesheet" />
   </head>
   <body>
+    <h1>Bits</h1>
     <h2>
       Change the representation of
       <code id="problem">&nbsp;</code>
       from Base <code>16</code> to Base <code>2</code>
     </h2>
-    <form id="question">
-      <fieldset>
-        <input
-          id="user-input"
-          type="text"
-          inputmode="numeric"
-          spellcheck="false"
-          autocomplete="off"
-          autocorrect="off"
-          autocapitalize="off"
-        />
-        <input id="enter" type="submit" />
-      </fieldset>
+    <form class="input input--hoshi" id="question">
+      <input
+        class="input__field input__field--hoshi"
+        type="text"
+        id="user-input"
+        spellcheck="false"
+        autocomplete="off"
+      />
+      <label
+        class="input__label input__label--hoshi input__label--hoshi-color-1"
+        for="user-input"
+      >
+        <span class="input__label-content input__label-content--hoshi"
+          >Answer</span
+        >
+      </label>
+      <div class="input-group-prepend">
+        <input value="→" id="enter" type="submit" />
+      </div>
     </form>
     <p class="tip">Enter a value!</p>
     <p class="test">&nbsp;</p>
