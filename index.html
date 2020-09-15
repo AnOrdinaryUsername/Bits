@@ -14,35 +14,64 @@
     <link href="styles/main.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>Bits</h1>
-    <h2>
-      Change the representation of
-      <code id="problem">&nbsp;</code>
-      from Base <code>16</code> to Base <code>2</code>
-    </h2>
-    <form class="input input--hoshi" id="question">
-      <input
-        class="input__field input__field--hoshi"
-        type="text"
-        id="user-input"
-        spellcheck="false"
-        autocomplete="off"
-      />
-      <label
-        class="input__label input__label--hoshi input__label--hoshi-color-1"
-        for="user-input"
-      >
-        <span class="input__label-content input__label-content--hoshi"
-          >Answer</span
-        >
-      </label>
-      <div class="input-group-prepend">
-        <input value="→" id="enter" type="submit" />
-      </div>
-    </form>
-    <p class="tip">Enter a value!</p>
-    <p class="test">&nbsp;</p>
-    <p class="test2">&nbsp;</p>
+    <main>
+      <section>
+        <div id="choose-practice" class="flex-column">
+          <p>
+            I want to practice converting a
+            <label for="base-select" class="screen-reader-only">Base</label>
+            <select name="base-representation" id="base-select-1">
+              <option value="16">hexadecimal</option>
+              <option value="10">decimal</option>
+              <option value="8">octal</option>
+              <option value="2">binary</option>
+            </select>
+            representation of a number to
+            <label for="base-select" class="screen-reader-only">Base</label>
+            <select name="base-representation" id="base-select-2">
+              <option value="16">hexadecimal</option>
+              <option value="10">decimal</option>
+              <option value="8">octal</option>
+              <option value="2">binary</option>
+            </select>
+            .
+          </p>
+          <button id="confirm-choices">Confirm choices</button>
+        </div>
+        <div id="practice-problems" class="hide-display">
+          <h1>Bits</h1>
+          <h2>
+            Change the representation of
+            <span class="problem" id="question">&nbsp;</span>
+            from Base <span class="problem" id="base-1">16</span> to Base
+            <span class="problem" id="base-2">2</span>
+          </h2>
+          <form class="input input--hoshi" id="user-answer">
+            <input
+              class="input__field input__field--hoshi"
+              type="text"
+              id="user-input"
+              spellcheck="false"
+              autocomplete="off"
+            />
+            <label
+              class="input__label input__label--hoshi input__label--hoshi-color-1"
+              for="user-input"
+            >
+              <span class="input__label-content input__label-content--hoshi"
+                >Answer</span
+              >
+            </label>
+            <div class="input-group-prepend">
+              <input value="→" id="enter" type="submit" />
+            </div>
+          </form>
+          <p class="tip">Enter a value!</p>
+          <p class="test">&nbsp;</p>
+          <p class="test2">&nbsp;</p>
+        </div>
+      </section>
+    </main>
     <script src="bundle.js"></script>
   </body>
 </html>
