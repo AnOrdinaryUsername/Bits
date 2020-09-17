@@ -1,49 +1,42 @@
 import Problem from "./Problem";
 import UserInput from "./UserInput";
 
-const HEXADECIMAL = 16;
+enum Base {
+  Hexadecimal = 16,
+  Binary = 2,
+}
 
 export default class Answer {
   public solution: string;
-  private userSolution: UserInput;
-  private randProblem: Problem;
+  private _userSolution: UserInput;
+  private _randProblem: Problem;
 
   constructor(inputObj: UserInput, questionObj: Problem) {
-    this.userSolution = inputObj;
-    this.randProblem = questionObj;
+    this._userSolution = inputObj;
+    this._randProblem = questionObj;
   }
 
   public isCorrect = (): boolean => {
     this.calculateAnswer();
-    return this.solution === this.userSolution.grabInput().replace(/\s/g, "");
-  };
-
-  // toString(2) doesn't have leading zeros, so this method adds the rest of them.
-  private adjustHexSolution = (answer: string, amount: number): string => {
-    const stringArray = answer.split(""); // Create array for old solution.
-    const remainingZeros = HEXADECIMAL - amount;
-
-    for (let i = 0; i < remainingZeros; ++i) {
-      stringArray.unshift("0"); // Push remaining zeros to the front.
-    }
-
-    return stringArray.join(""); // Concatenate elements in array to new answer string.
+    // replace() has a regex that removes all whitespaces.
+    return this.solution === this._userSolution.grabInput().replace(/\s/g, "");
   };
 
   private calculateAnswer = (): void => {
-    const oldBase = this.randProblem.selection.oldBase;
-    const newBase = this.randProblem.selection.newBase;
-    const question = parseInt(this.randProblem.getQuestion(), oldBase);
+    const oldBase = this._randProblem.selection.oldBase;
+    const newBase = this._randProblem.selection.newBase;
+    const question = parseInt(this._randProblem.question, oldBase);
 
     const solution = question.toString(newBase);
 
     // A nibble is a 4-bit group used to denote a single hex digit.
     const NIBBLE = 4;
-    if (oldBase === HEXADECIMAL) {
+    if (oldBase === Base.Hexadecimal && newBase === Base.Binary) {
       if (solution.length !== question * NIBBLE) {
-        // Yes I know I can use String.prototype.padStart(), but that's in ES2017.
-        // Gotta support the bros with browsers only supporting ES5.
-        this.solution = this.adjustHexSolution(solution, solution.length);
+        // Pad missing zeros for new binary number.
+        // toString(2) doesn't include leading zeros.
+        this.solution = solution.padStart(Base.Hexadecimal, "0");
+        return;
       }
     }
 
