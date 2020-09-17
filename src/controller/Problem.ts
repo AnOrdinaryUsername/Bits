@@ -1,28 +1,28 @@
 import UserChoice from "./UserChoice";
 
 export default class Problem {
-  private question: string;
+  private _question: string;
   public selection: UserChoice;
 
   constructor(select: UserChoice) {
-    this.question = "";
+    this._question = "";
     this.selection = select;
   }
 
-  private getRandomDigit = (base = 10): string => {
-    const randNum = Math.floor(Math.random() * Math.floor(base));
+  private getRandomDigit = (): string => {
+    const randNum = Math.floor(Math.random() * this.selection.oldBase);
 
-    return randNum.toString(base).toUpperCase();
+    return randNum.toString(this.selection.oldBase).toUpperCase();
   };
 
-  public generateProblem = (amount = 4, base = 10): void => {
+  public generateProblem = (amount = 4): void => {
     for (let i = 0; i < amount; ++i) {
-      this.question += this.getRandomDigit(base);
+      this._question += this.getRandomDigit();
     }
     document.getElementById("question").textContent = this.question;
   };
 
-  public getQuestion = (): string => {
-    return this.question;
-  };
+  public get question(): string {
+    return this._question;
+  }
 }
