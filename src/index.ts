@@ -2,14 +2,13 @@ import Problem from "./controller/Problem";
 import UserChoice from "./controller/UserChoice";
 import UserInput from "./controller/UserInput";
 
-const main = (): void => {
+((): void => {
   const choices: UserChoice = new UserChoice();
-  const input: UserInput = new UserInput();
-
   const problem: Problem = new Problem(choices);
 
-  choices.confirmChoice(problem);
-  input.onSubmit(problem);
-};
+  const input: UserInput = new UserInput(problem);
 
-main();
+  choices.confirmChoice(problem);
+  input.onSubmit();
+  input.showNextQuestion();
+})();
