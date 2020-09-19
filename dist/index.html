@@ -13,11 +13,11 @@
     <link href="styles/normalize.css" rel="stylesheet" />
     <link href="styles/main.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class="generic flex-column">
     <main>
       <section>
-        <div id="choose-practice" class="flex-column">
-          <p>
+        <div id="choose-practice" class="nice-font">
+          <p class="fancy">
             I want to practice converting a
             <label for="base-select" class="screen-reader-only">Base</label>
             <select name="base-representation" id="base-select-1">
@@ -36,7 +36,9 @@
             </select>
             .
           </p>
-          <button id="confirm-choices">Confirm choices</button>
+          <button id="confirm-choices" class="testerino">
+            Confirm choices
+          </button>
         </div>
         <div id="practice-problems" class="hide-display">
           <h1>Bits</h1>
@@ -69,6 +71,10 @@
           <p class="tip">Enter a value!</p>
           <p class="test">&nbsp;</p>
           <p class="test2">&nbsp;</p>
+          <div class="result flex-column">
+            <strong>Here's where the result will be!</strong>
+            <button class="hide-visibility">Next question</button>
+          </div>
         </div>
       </section>
     </main>
