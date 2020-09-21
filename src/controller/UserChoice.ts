@@ -22,10 +22,7 @@ export default class UserChoice {
         document.getElementById("base-select-2")
       )).value;
 
-      if (unconvertedBase === convertedBase) {
-        console.log("bro");
-        return;
-      }
+      if (unconvertedBase === convertedBase) return;
 
       firstQuestion.selection._oldBase = parseInt(unconvertedBase);
       firstQuestion.selection._newBase = parseInt(convertedBase);
@@ -39,6 +36,10 @@ export default class UserChoice {
       document
         .getElementById("practice-problems")
         .classList.toggle("hide-display");
+
+      document
+        .getElementById("practice-problems")
+        .classList.toggle("flex-column");
     });
   };
 
