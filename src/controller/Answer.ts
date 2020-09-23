@@ -19,7 +19,10 @@ export default class Answer {
   public isCorrect = (): boolean => {
     this.calculateAnswer();
     // replace() has a regex that removes all whitespaces.
-    return this.solution === this._userSolution.grabInput().replace(/\s/g, "");
+    return (
+      this.solution.toUpperCase() ===
+      this._userSolution.grabInput().replace(/\s/g, "").toUpperCase()
+    );
   };
 
   private calculateAnswer = (): void => {
