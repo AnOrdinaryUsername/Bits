@@ -18,7 +18,8 @@ export default class UserInput {
       // once submitted, check if answer is correct + display box with feedback
       e.preventDefault();
 
-      if (this._submitState === true) return;
+      // If user has submitted already, prevent another submittal
+      if (this._submitState) return;
 
       const a: Answer = new Answer(this, this._currentProblem);
       const tip = document.querySelector(".tip");
