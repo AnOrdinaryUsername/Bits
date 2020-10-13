@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "A small website to understanding bits.",
   "main": "index.ts",
-  "dependencies": {
-    "ts-node": "^9.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
@@ -16,8 +14,9 @@
     "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "ts-node": "ts-node"
+    "build": "webpack",
+    "lint": "eslint --ext .ts,.tsx src",
+    "lint:fix": "eslint --ext .ts,.tsx src --fix"
   },
   "repository": {
     "type": "git",
