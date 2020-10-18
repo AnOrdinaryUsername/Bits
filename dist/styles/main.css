@@ -184,6 +184,25 @@
   text-align: center;
 }
 
+#practice-problems h2 {
+  font-size: 30px;
+  bottom: 0px;
+  position: relative;
+  animation: cubic-bezier(0.4, 0, 0.2, 1) 550ms fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .hide-visibility {
   visibility: hidden;
 }
