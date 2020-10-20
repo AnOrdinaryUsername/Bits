@@ -1,5 +1,5 @@
-import Problem from "./Problem";
-import UserInput from "./UserInput";
+import Problem from "../problems/Problem";
+import UserInput from "../UserInput";
 
 enum Base {
   Hexadecimal = 16,

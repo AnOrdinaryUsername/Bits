@@ -1,4 +1,4 @@
-import Problem from "./controller/Problem";
+import Problem from "./controller/problems/Problem";
 import UserChoice from "./controller/UserChoice";
 import UserInput from "./controller/UserInput";
 
