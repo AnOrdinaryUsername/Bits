@@ -1,4 +1,4 @@
-import Problem from "./Problem";
+import Problem from "./problems/Problem";
 
 export default class UserChoice {
   private _amount: number;
@@ -27,19 +27,13 @@ export default class UserChoice {
       firstQuestion.selection._oldBase = parseInt(unconvertedBase);
       firstQuestion.selection._newBase = parseInt(convertedBase);
 
-      document
-        .getElementById("choose-practice")
-        .classList.toggle("hide-display");
+      document.getElementById("choose-practice").classList.toggle("hide-display");
 
       firstQuestion.generateProblem();
 
-      document
-        .getElementById("practice-problems")
-        .classList.toggle("hide-display");
+      document.getElementById("practice-problems").classList.toggle("hide-display");
 
-      document
-        .getElementById("practice-problems")
-        .classList.toggle("flex-column");
+      document.getElementById("practice-problems").classList.toggle("flex-column");
     });
   };
 

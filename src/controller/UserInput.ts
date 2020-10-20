@@ -1,5 +1,5 @@
-import Answer from "./Answer";
-import Problem from "./Problem";
+import Answer from "./answers/Answer";
+import Problem from "./problems/Problem";
 import Score from "./Score";
 
 export default class UserInput {
@@ -35,19 +35,13 @@ export default class UserInput {
       } else {
         tip.textContent = "Sadge not right";
         this._userScore.incrementWrongCount();
-        this._currentProblem.pushQuestionGotWrong(
-          this._currentProblem.question
-        );
+        this._currentProblem.pushQuestionGotWrong(this._currentProblem.question);
       }
 
       document.querySelector(".test").textContent = a.solution;
-      document.querySelector(
-        ".test2"
-      ).textContent = a.solution.length.toString();
+      document.querySelector(".test2").textContent = a.solution.length.toString();
 
-      document
-        .querySelector(".result button")
-        .classList.toggle("hide-visibility");
+      document.querySelector(".result button").classList.toggle("hide-visibility");
 
       this._submitState = true;
     });
