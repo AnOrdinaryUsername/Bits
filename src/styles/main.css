@@ -1,0 +1,22 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: black;
+  display: flex;
+  font-size: 62.5%;
+  min-height: 100%;
+}
+
+body {
+  font: 16px/1.65 system-ui, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  flex: 1;
+  font-size: 1.6rem;
+  line-height: 1.65;
+}
+
+
