@@ -7,6 +7,17 @@ module.exports = {
   devtool: 'inline-source-map',
   module: {
     rules: [
+      // style-loader to add all the styles  inside the style tag of the document
+      // typings-for-css-modules-loader to generate automatic type definitions
+      // css-loader to bundle all the css files into one file
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: "@teamsupercell/typings-for-css-modules-loader" },
+          { loader: "css-loader", options: { modules: true } },
+        ]
+      },
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
@@ -14,12 +25,6 @@ module.exports = {
           loader: 'babel-loader'
         },
       },
-      // css-loader to bundle all the css files into one file
-      // style-loader to add all the styles  inside the style tag of the document
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
     ],
   },
   resolve: {
