@@ -1,24 +1,14 @@
 import React, { ReactNode } from 'react';
-import '../styles/main.css';
+import PracticeOptions from '../components/PracticeOptions';
+import styles from '../styles/main.css';
 
-interface State {
-	isToggleOn: boolean;
-}
 
-export default class App extends React.Component<unknown, State> {
-	public readonly state: Readonly<State> = {
-		isToggleOn: true
-	}
-
-	handleClick = (): void => {
-		this.setState((test) => ({ isToggleOn: !test.isToggleOn }));
-	};
-
+export default class App extends React.Component {
 	render(): ReactNode {
 		return (
-			<button onClick={this.handleClick}>
-				{this.state.isToggleOn ? 'EAT MY' : 'OFF'}
-			</button>
+			<main className={styles['site-container']}>
+				<PracticeOptions />
+			</main>
 		);
 	}
 }

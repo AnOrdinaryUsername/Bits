@@ -1,0 +1,24 @@
+.background {
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+  justify-content: center;
+  position: static;
+  width: 100%;
+}
+
+.background__svg {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.height-filler {
+  height: 100%;
+}
+
+.height-filler--bottom-color {
+  background-color: hsl(225, 56%, 21%);
+}
