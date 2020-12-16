@@ -1,15 +1,20 @@
+interface Result {
+  isRight: boolean;
+}
+
 export default abstract class Problem {
-  protected _wrongAnswers: Problem[];
+  protected answer: Result;
+  protected solution: Problem;
+  protected userSolution: Problem;
 
   constructor() {
-    this._wrongAnswers = [];
+    this.answer = { isRight: null };
+    this.solution = null;
+    this.userSolution = null;
   }
-
-  protected abstract getRandomDigit(): string;
 
   public abstract generateProblem(): void;
 
-  public pushQuestionsGotWrong = (question: Problem): void => {
-    this._wrongAnswers.push(question);
-  };
+  protected abstract checkAnswer(): void;
+
 }
