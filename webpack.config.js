@@ -1,4 +1,5 @@
 const path = require('path');
+const os = require('os');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -40,7 +41,7 @@ module.exports = {
     liveReload: false,
     writeToDisk: true,
     open: {
-      app: ['chrome', '--incognito'],
+      app: [getApp(), '--incognito'],
     }
   },
   plugins: [
@@ -52,3 +53,25 @@ module.exports = {
     })
   ]
 };
+
+function getApp() {
+  const platform = process.platform;
+  let app = '';
+
+  if (platform === 'linux') {
+    app = 'google-chrome';
+
+    // For Windows Subsystem for Linux (WSL)
+    if (os.release().toLowerCase().includes('microsoft')) {
+      app = '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe';
+    }
+    // MacOS
+  } else if (platform === 'darwin') {
+    app = 'Google Chrome';
+    // Windows
+  } else if (platform === 'win32') {
+    app = 'chrome';
+  }
+
+  return app;
+}
