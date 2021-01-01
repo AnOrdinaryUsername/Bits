@@ -1,8 +1,15 @@
-import React from 'react';
-import Background from '../components/Background';
-import styles from "../styles/PracticeOptions.css";
+import React, { ReactElement } from 'react';
+import styles from '../styles/PracticeOptions.css';
+import Background from './Background';
+import FormBox from './FormBox';
 
-const CheckboxButton = (props) => {
+interface CheckboxButtonProps {
+    buttonValue: string;
+    buttonId: string;
+    buttonName: string;
+}
+
+const CheckboxButton = (props: CheckboxButtonProps): ReactElement => {
     return (
         <React.Fragment>
             <input type="checkbox" name="practice-problem"
@@ -30,7 +37,11 @@ const Options = () => {
     )
 };
 
-const Legend = (props) => {
+interface LegendProps {
+    caption: string;
+}
+
+const Legend = (props: LegendProps): ReactElement => {
     return (
         <legend className={`${styles.fieldset__legend} ${styles['fieldset__legend--blue']}`}>
             {props.caption}
@@ -38,21 +49,15 @@ const Legend = (props) => {
     );
 };
 
-export default class PracticeOptions extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const PracticeOptions = (): ReactElement => {
+    return (
+        <Background>
+            <FormBox>
+                <Legend caption="What do you want to practice?" />
+                <Options />
+            </FormBox>
+        </Background>
+    );
+};
 
-    render() {
-        return (
-            <Background>
-                <form className={styles.form}>
-                    <fieldset>
-                        <Legend caption="What do you want to practice?" />
-                        <Options />
-                    </fieldset>
-                </form>
-            </Background>
-        );
-    }
-}
+export default PracticeOptions;

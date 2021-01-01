@@ -1,4 +1,4 @@
-import Problem from "./Problem";
+import Problem from './Result';
 
 export default class BaseConversion extends Problem {
   private _oldBase: number; // The base that we want to convert.

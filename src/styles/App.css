@@ -56,18 +56,28 @@ table {
 }
 
 html {
-  background-color: hsl(215, 56%, 62%);
+  /* hsl(209, 56%, 92%) */
+  background-color: hsl(209, 56%, 85%);
   display: flex;
   font-size: 62.5%;
   min-height: 100%;
 }
 
 body {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
   font: 16px/1.65 system-ui, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  flex: 1;
   font-size: 1.6em;
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 legend {
@@ -87,13 +97,18 @@ fieldset {
   margin: 2.4rem;
 }
 
+/* On Firefox, font-weight: 500 is noticeably lighter. 550 fixes that.*/
+strong {
+  font-weight: 550;
+}
+
 svg {
   width: 100%;
   display: block;
 }
 
-.site-container {
+.main {
   display: flex;
+  flex: 1;
   flex-flow: column nowrap;
-  height: 100%;
 }

@@ -1,0 +1,27 @@
+.form {
+  height: auto;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.form--bg-shadow {
+  box-shadow: 0 15px 35px hsla(0, 0%, 0%, 0.2);
+}
+
+.form--bg-white {
+  background-color: hsl(0, 0%, 100%);
+}
+
+.form--border-round {
+  border-radius: 1.2rem;
+}
+
+.fieldset {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}

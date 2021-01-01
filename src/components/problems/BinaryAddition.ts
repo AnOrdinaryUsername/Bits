@@ -1,4 +1,4 @@
-import Problem from "./Problem";
+import Problem from './Result';
 
 export default class BinaryAddition extends Problem {
   private _topBit: string;

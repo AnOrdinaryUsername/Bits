@@ -6,7 +6,6 @@ declare namespace PracticeOptionsCssNamespace {
     "checkbox__label--blue": string;
     fieldset__legend: string;
     "fieldset__legend--blue": string;
-    form: string;
   }
 }
 
