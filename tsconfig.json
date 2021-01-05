@@ -1,6 +1,10 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
-    "outDir": "./dist/",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "sourceMap": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -9,6 +13,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "module": "es6",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
     "target": "es2016",
     "lib": [
       "es2017",
@@ -17,6 +23,10 @@
     ],
     "jsx": "react",
     "allowJs": true,
-    "noEmit": true
-  }
+    "noEmit": true,
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+  ],
 }
