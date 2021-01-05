@@ -1,8 +1,10 @@
-import { getRandomDecimal, getRandomInt } from '../../utils/utility';
+import { getRandomDecimal, getRandomInt } from '../../utils/RandomNumGen';
+import { ScientificNotation, ScientificNotationConverter } from '../../utils/ScientificNotation';
+import { StateLiteralData } from '../InstructionSetForm';
 import Problem from './Problem';
 import Result from './Result';
 
-interface InstructionClassData {
+export interface InstructionClassData {
     [key: string]: string;
 }
 
@@ -11,13 +13,16 @@ class InstructionClass {
     readonly cpi: number;
     public instructionPercent: number;
     // The results
-    private _clockCycles: ClockCyclesAnswer;
     private _instructionCount: InstructionCountAnswer;
+    private _clockCycles: ClockCyclesAnswer;
 
     constructor(className: string) {
         this.className = className;
         this.instructionPercent = this.getRandomPercentage();
         this.cpi = this.getRandomCpi();
+
+        this._instructionCount = new InstructionCountAnswer();
+        this._clockCycles = new ClockCyclesAnswer();
     }
 
     private getRandomCpi = (): number => {
@@ -49,31 +54,61 @@ class InstructionClass {
     }
 }
 
+interface Solutions {
+    userSolution: ScientificNotation;
+    actualSolution: ScientificNotation;
+}
 
-class InstructionCountAnswer implements Result {
+class InstructionCountAnswer implements Result, Solutions {
     public answer: {
         isRight: boolean;
     };
 
-    constructor(public solution: number = null,
-        public actualSolution: number = null) {
-        this.answer.isRight = null;
+    public userSolution: ScientificNotation;
+    public actualSolution: ScientificNotation;
+
+    constructor() {
+        this.answer = {
+            isRight: false,
+        };
+
+        this.userSolution = {
+            significand: undefined,
+            exponent: undefined,
+        };
+
+        this.actualSolution = {
+            significand: undefined,
+            exponent: undefined,
+        };
     }
 
     private createSolution = (classObject: InstructionClass, setObject: InstructionSet): void => {
         const TWO_DECIMAL_PLACE = 100;
+        const BASE = 10;
+        const ROUND_AMOUNT = 2;
 
         const decimalPercent = classObject.instructionPercent / TWO_DECIMAL_PLACE;
-        this.actualSolution = setObject.dynamicInstructionCount * decimalPercent;
+
+        // Convert scientific notation to decimal notation for calculations
+        const { significand, exponent } = setObject.dynamicInstructionCount;
+        const decimalDynamicInstructionCount = significand * (BASE ** exponent)
+
+        const decimalInstructionCount = decimalDynamicInstructionCount * decimalPercent;
+
+        const converter = new ScientificNotationConverter();
+        this.actualSolution = converter.generateForm(decimalInstructionCount, ROUND_AMOUNT);
     };
 
-    public checkUserAnswer = (userAnswer: number, classObject: InstructionClass,
+    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,
         setObject: InstructionSet): void => {
         this.createSolution(classObject, setObject);
 
-        this.solution = userAnswer;
+        this.userSolution = userInput;
 
-        if (this.actualSolution === this.solution) {
+        // JSON.stringify is good enough for this job, otherwise create a more robust check for more
+        // complex objects. Remember, order is important here.
+        if (JSON.stringify(this.actualSolution) === JSON.stringify(this.userSolution)) {
             this.answer.isRight = true;
         } else {
             this.answer.isRight = false;
@@ -82,41 +117,69 @@ class InstructionCountAnswer implements Result {
 }
 
 
-class ClockCyclesAnswer implements Result {
+class ClockCyclesAnswer implements Result, Solutions {
     public answer: {
         isRight: boolean;
     };
 
-    constructor(public solution: number = null,
-        public actualSolution: number = null) {
-        this.answer.isRight = null;
+    public userSolution: ScientificNotation;
+    public actualSolution: ScientificNotation;
+
+    constructor() {
+        this.answer = {
+            isRight: false,
+        };
+
+        this.userSolution = {
+            significand: undefined,
+            exponent: undefined,
+        };
+
+        this.actualSolution = {
+            significand: undefined,
+            exponent: undefined,
+        };
     }
 
     private createSolution = (instrObject: InstructionClass): void => {
-        this.actualSolution = instrObject.instructionCount.actualSolution * instrObject.cpi;
+        const { significand, exponent } = instrObject.instructionCount.actualSolution;
+        const BASE = 10;
+        const ROUND_AMOUNT = 2;
+
+        const decimalInstructionCount = significand * (BASE ** exponent);
+        const decimalClockCycles = decimalInstructionCount * instrObject.cpi;
+
+        const converter = new ScientificNotationConverter();
+        this.actualSolution = converter.generateForm(decimalClockCycles, ROUND_AMOUNT);
     };
 
-    public checkUserAnswer = (): void => {
+    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,): void => {
+        this.createSolution(classObject);
 
+        this.userSolution = userInput;
+
+        if (JSON.stringify(this.actualSolution) === JSON.stringify(this.userSolution)) {
+            this.answer.isRight = true;
+        } else {
+            this.answer.isRight = false;
+        }
     };
 }
 
-/* Given the following form in scientific notation:
-*                   m * 10^n
-*           m = significand , n = decade
-*/
-interface InstructionCount {
-    significand: number;
-    decade: number;
+
+export interface InstructionSetData {
+    dynamicInstructionCount: ScientificNotation;
+    clockRate: number;
+    isClassCPresent: boolean;
 }
 
-export default class InstructionSet implements Problem {
+export class InstructionSet implements Problem, InstructionSetData {
     readonly classA: InstructionClass;
     readonly classB: InstructionClass;
     readonly classC?: InstructionClass;
     public isClassCPresent = false;
 
-    readonly dynamicInstructionCount: InstructionCount;
+    readonly dynamicInstructionCount: ScientificNotation;
     readonly clockRate: number;
 
     constructor() {
@@ -134,16 +197,16 @@ export default class InstructionSet implements Problem {
         this.generateProblem();
     }
 
-    private getRandomInstructionCount = (): InstructionCount => {
+    private getRandomInstructionCount = (): ScientificNotation => {
         const [SIGNIFICAND_START, SIGNIFICAND_END] = [1, 2];
         const randomSignificand = getRandomInt(SIGNIFICAND_START, SIGNIFICAND_END);
 
-        const [DECADE_START, DECADE_END] = [5, 7];
-        const randomDecade = getRandomInt(DECADE_START, DECADE_END);
+        const [exponent_START, exponent_END] = [5, 7];
+        const randomexponent = getRandomInt(exponent_START, exponent_END);
 
         return ({
             significand: randomSignificand,
-            decade: randomDecade,
+            exponent: randomexponent,
         });
     };
 
@@ -168,7 +231,18 @@ export default class InstructionSet implements Problem {
         this.classC.instructionPercent = remainingPercent;
     };
 
-    public evaluateAnswer = (): void => {
+    public evaluateAnswer = (userInput: StateLiteralData): void => {
+        const { classA, classB, classC } = userInput;
 
+        this.classA.instructionCount.checkUserAnswer(classA.instructionCount, this.classA, this);
+        this.classA.clockCycles.checkUserAnswer(classA.clockCycles, this.classA);
+
+        this.classB.instructionCount.checkUserAnswer(classB.instructionCount, this.classB, this);
+        this.classB.clockCycles.checkUserAnswer(classB.clockCycles, this.classB);
+
+        if (this.isClassCPresent) {
+            this.classC.instructionCount.checkUserAnswer(classC.instructionCount, this.classC, this);
+            this.classC.clockCycles.checkUserAnswer(classC.clockCycles, this.classC);
+        }
     };
 }
