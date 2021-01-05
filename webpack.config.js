@@ -34,12 +34,14 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   devServer: {
     contentBase: './src',
     inline: true,
     liveReload: false,
     writeToDisk: true,
+    historyApiFallback: true,
     open: {
       app: [getApp(), '--incognito'],
     }
