@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import uniqid from 'uniqid';
 import styles from '../styles/Table.css';
 
 
@@ -10,7 +11,7 @@ interface TableChildrenProps {
 
 const TableRow = (props: TableChildrenProps): ReactElement => {
     return (
-        <tr className={`${props.inTableHead ? null: styles.table__row}`}>
+        <tr className={`${props.inTableHead ? "" : styles.table__row}`}>
             {props.children}
         </tr>
     );
@@ -48,8 +49,8 @@ const TableHead = (props: TableDataProps): ReactElement => {
     return (
         <thead>
             <TableRow inTableHead={true}>
-                {data.map((element, index) => 
-                    <TableHeaderCell key={index} text={element}></TableHeaderCell>
+                {data.map(element => 
+                    <TableHeaderCell key={uniqid()} text={element}></TableHeaderCell>
                 )}
             </TableRow>
         </thead>
@@ -69,8 +70,8 @@ const TableData = (props: TableDataProps): ReactElement => {
 
     return (
         <TableRow class={styles.table__row}>
-            {data.map((element, index) =>
-                    <TableDataCell key={index} text={element}></TableDataCell>
+            {data.map(element =>
+                    <TableDataCell key={uniqid()} text={element}></TableDataCell>
             )}
         </TableRow>
     )
@@ -94,24 +95,3 @@ export {
     TableDataCell,
     TableData
 };
-
-/**
- * const Table = (...rest: Array<{ [key: string]: string }>): ReactElement => {
-    const keys = rest.map(element => Object.keys(element));
-
-    const cellArray = [];
-    for (let i = 0; i < rest.length; ++i) {
-        for (let j = 0; j < keys.length; ++j) {
-            const propertyValues = keys[i][j];
-            const data = rest[i][propertyValues];
-
-            if (i === 0) {
-                cellArray.push(
-                    <TableHead>
-                        <TableHeaderCell text={data} />
-                    </TableHead>
-                );
-            }
-        }
-    }
- */
