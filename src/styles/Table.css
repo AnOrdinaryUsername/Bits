@@ -35,3 +35,7 @@
   padding: 1.6rem;
   text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+  /*fix it on mobile*/
+}

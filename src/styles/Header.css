@@ -1,3 +1,4 @@
+/* Black background color for header */
 .container {
   background-color: hsl(224, 15%, 19%);
 }
@@ -25,6 +26,7 @@
   align-items: baseline;
 }
 
+/* Bits text logo style */
 .header__left--logo {
   color: hsl(46, 79%, 56%);
   font-size: 2.4rem;
@@ -45,6 +47,7 @@
   position: relative;
 }
 
+/* Yellow underline styles */
 .nav__link::after {
   content: '';
   position: absolute;
@@ -57,6 +60,7 @@
   transition: width .5s ease-in-out;
 }
 
+/* Expand yellow underline on hover */
 .nav__link:hover::after {
   width: 100%;
 }
@@ -72,6 +76,7 @@
   border-radius: 0.75em;
   box-shadow: 0.125em 0.125em 0 0.125em rgba(0,0,0,0.3) inset;
   color: #fdea7b;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   margin: auto;

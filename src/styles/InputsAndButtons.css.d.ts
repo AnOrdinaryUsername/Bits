@@ -1,5 +1,6 @@
 declare namespace InputsAndButtonsCssNamespace {
   export interface IInputsAndButtonsCss {
+    "input-submit": string;
     "input-text": string;
   }
 }
