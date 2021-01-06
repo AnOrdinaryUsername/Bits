@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.background--color {
+  background-color: hsl(209, 56%, 85%);
+}
+
 .svg-wrapper {
   position: absolute;
   left: 0px;

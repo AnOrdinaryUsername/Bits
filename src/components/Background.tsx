@@ -23,12 +23,11 @@ const Background = (props: BackgroundProps): ReactElement => {
     return (
         <React.Fragment>
             {/* '\u00A0' is &nbsp; in unicode */}
-            <div className={styles.background}>
+            <div className={`${styles.background} ${styles['background--color']}`}>
                 <BackgroundSvg />
                 {props.children}
             </div>
-            <div className={`${styles['height-filler']} 
-                                    ${styles['height-filler--bottom-color']}`}>
+            <div className={`${styles['height-filler']} ${styles['height-filler--bottom-color']}`}>
                 {'\u00A0'}
             </div>
         </React.Fragment>

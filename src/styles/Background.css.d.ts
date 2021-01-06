@@ -1,6 +1,7 @@
 declare namespace BackgroundCssNamespace {
   export interface IBackgroundCss {
     background: string;
+    "background--color": string;
     "height-filler": string;
     "height-filler--bottom-color": string;
     "svg-wrapper": string;
