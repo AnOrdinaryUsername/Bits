@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
+import styles from '../styles/NotFound.css';
 
 const NotFound = (): ReactElement => {
+    const path = useLocation().pathname;
+
     return (
-        <div>
-            <h1>¯\_(ツ)_/¯</h1>
-            <p>Sorry, the page
-                <code> {useLocation().pathname} </code>
-                does not exist.
-            </p>
+        <div className={styles['page-container']}>
+            <h1 className={styles.shrug}>¯\_(ツ)_/¯</h1>
+            <p>Sorry, the page <code>{path}</code> does not exist.</p>
         </div>
     );
 };
