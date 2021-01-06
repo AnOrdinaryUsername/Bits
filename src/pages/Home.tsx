@@ -1,5 +1,9 @@
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactElement, ReactNode } from 'react';
 import Particles from 'react-particles-js';
+import { Link } from 'react-router-dom';
+import styles from '../styles/Home.css';
 
 class Canvas extends React.Component {
     state = { 
@@ -28,58 +32,60 @@ class Canvas extends React.Component {
         return (
             <Particles
             {...this.state}
-            params={{
-                particles: {
-                number: {
-                    value: 30,
+            params={{particles: {
+                  number: {
+                    value: 80,
                     density: {
-                    enable: true,
-                    value_area: 800
+                      enable: true,
+                      value_area: 800
                     }
-                },
-                color: {
-                    value: "#ffffff"
-                },
-                shape: {
+                  },
+                  color: {
+                    value: "#88c8ff"
+                  },
+                  shape: {
                     type: "circle",
                     stroke: {
-                    width: 0,
-                    color: "#000000"
+                      width: 0,
+                      color: "#000000"
+                    },
+                    polygon: {
+                      nb_sides: 5
                     },
                     image: {
-                    src: "img/github.svg",
-                    width: 100,
-                    height: 100
+                      src: "img/github.svg",
+                      width: 100,
+                      height: 100
                     }
-                },
-                opacity: {
-                    value: 0.4,
+                  },
+                  opacity: {
+                    value: 0,
+                    random: false,
+                    anim: {
+                      enable: false,
+                      speed: 1,
+                      opacity_min: 0.1,
+                      sync: false
+                    }
+                  },
+                  size: {
+                    value: 0,
                     random: true,
                     anim: {
-                    enable: true,
-                    speed: 1,
-                    opacity_min: 0.1,
-                    sync: false
+                      enable: false,
+                      speed: 40,
+                      size_min: 0.1,
+                      sync: false
                     }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
+                  },
+                  line_linked: {
                     enable: true,
-                    speed: 2,
-                    size_min: 0.1,
-                    sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 100,
-                    color: "#fff",
+                    distance: 150,
+                    color: "hsl(208, 100%, 77%)", // #88c8ff, the blue lines
                     opacity: 1,
-                    width: 1,
-                },
-                move: {
+                    width: 1
+                  },
+                  move: {
                     enable: true,
                     speed: 1,
                     direction: "none",
@@ -88,26 +94,61 @@ class Canvas extends React.Component {
                     out_mode: "out",
                     bounce: false,
                     attract: {
-                    enable: false,
-                    rotateX: 600,
-                    rotateY: 1200
+                      enable: false,
+                      rotateX: 600,
+                      rotateY: 1200
                     }
-                }
+                  }
                 },
                 interactivity: {
-                detect_on: "canvas",
-                events: {
+                  detect_on: "canvas",
+                  events: {
                     onhover: {
-                    enable: false
+                      enable: false,
+                      mode: "repulse"
                     },
                     onclick: {
-                    enable: false
+                      enable: false,
+                      mode: "push"
                     },
                     resize: true
-                }
+                  },
+                  modes: {
+                    grab: {
+                      distance: 400,
+                      line_linked: {
+                        opacity: 1
+                      }
+                    },
+                    bubble: {
+                      distance: 400,
+                      size: 40,
+                      duration: 2,
+                      opacity: 8,
+                    },
+                    repulse: {
+                      distance: 200,
+                      duration: 0.4
+                    },
+                    push: {
+                      particles_nb: 4
+                    },
+                    remove: {
+                      particles_nb: 2
+                    }
+                  }
                 },
-                retina_detect: true
+                retina_detect: true,  
             }}
+            style={{
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "hsl(273, 22%, 8%)", // Black background #151019
+                    backgroundSize: "cover",
+                    backgroundPosition: "50% 50%",
+                    backgroundRepeat: "no-repeat",
+                }}
+            className={styles['canvas-wrapper']}
             />
         );
   }
@@ -117,10 +158,28 @@ class Canvas extends React.Component {
 
 const Home = (): ReactElement => {
     return (
-        <>
+        <section className={styles.hero}>
             <Canvas />
-            <div>This is home :)</div>
-        </>
+            <div className={styles['hero-container']}>
+                <div className={styles['hero-content']}>
+                    <h1>Learn to Speak the Language of Computers</h1>
+                    <p>Explore the history and nature of the binary system with engaging, interactive
+                        elements.
+                    </p>
+                    <div className={styles['hero-buttons']}>
+                        <Link className={`${styles['link-btn']} ${styles['link-btn--dark']} ${styles['link-btn--primary']}`}
+                            to="/how-it-works">
+                                Get Started
+                        </Link>
+                        <a className={`${styles['link-btn']} ${styles['link-btn--light']} ${styles['link-btn--secondary']}`}
+                            target="_blank" rel="noopener noreferrer" 
+                            href="https://github.com/AnOrdinaryUsername/Bits">
+                            <FontAwesomeIcon icon={faGithub} className={styles.svg} />GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 
