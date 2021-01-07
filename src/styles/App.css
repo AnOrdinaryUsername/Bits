@@ -75,6 +75,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (prefers-color-scheme: dark) {
+  body::-webkit-scrollbar {
+    background-color: hsl(215, 14%, 34%);
+    width: 1.4rem;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 0.3rem;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color:  hsl(218, 11%, 65%);
+    border-radius: 0.5rem;
+  }
+}
+
 a {
   text-decoration: none;
   color: white;
