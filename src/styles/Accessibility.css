@@ -1,0 +1,26 @@
+/* Accessibility outline for people navigating with keyboards 
+    (See links below for more details)
+    https://www.a11yproject.com/posts/2013-01-25-never-remove-css-outlines/
+
+    https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible
+*/
+.outline:focus {
+  /* Provide a fallback style for browsers
+     that don't support :focus-visible */
+  outline: none;
+  background: lightgrey;
+}
+
+.outline:focus:not(:focus-visible) {
+  /* Remove the focus indicator on mouse-focus for browsers
+     that do support :focus-visible */
+  background: transparent;
+}
+
+.outline:focus-visible {
+  /* Draw a very noticeable focus style for
+     keyboard-focus on browsers that do support
+     :focus-visible */
+  outline: 4px dashed darkorange;
+  background: transparent;
+}

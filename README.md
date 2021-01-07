@@ -1,13 +1,22 @@
 # Bits
+
+<p align="center">
+    <a href="https://anordinaryusername.github.io/Bits/">
+        <img alt="Bits Homepage"src="https://i.imgur.com/lBIKYPC_d.webp?maxwidth=1520&fidelity=grand">
+    </a>
+</p>
+
 Bits is a simple website designed to help people understand binary digits. Learn and practice the many ways computers and humans interact with these mystifying numbers.
 
 ## Features
+
 - [x] Generate practice problems
 - [ ] Include helpful resources page
 - [ ] Add a page that explains how bits works
-- [ ] Create a home page and navbar
+- [x] Create a home page and navbar
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ### Setting up your dev environment
@@ -17,6 +26,7 @@ If you ever get lost, follow Github's [Fork a repo](https://docs.github.com/en/f
 We'll also be using [npm](https://www.npmjs.com/get-npm) and [Git](https://git-scm.com/downloads) so make sure you have those installed.
 
 #### Clone the repo
+
 First click the "fork" button to create your own copy of the project.
 
 Then use ssh
@@ -44,6 +54,7 @@ npm install
 ```
 
 Add the upstream repository
+
 ```bash
 git remote add upstream https://github.com/AnOrdinaryUsername/Bits.git
 ```
@@ -78,16 +89,19 @@ Push changes to your fork
 git push origin your-branch-feature-name
 ```
 
-Now click the green pull request button, add your title and message, and submit your changes! 
+Now click the green pull request button, add your title and message, and submit your changes!
 
 #### Commands
 
-| Command            | Description                                |
-| ---------------    | -----------------------------              |
-| `npm install`      | Install the dependencies                   |
-| `npm run lint`     | Lint .ts/.tsx files with ESLint            |
-| `npm run lint:fix` | Fix all fixable issues using ESLint        |
-| `npm run build`    | Generate dist/bundle.js using src/index.ts |
+| Command               | Description                           |
+| --------------------- | ------------------------------------- |
+| `npm install`         | Install the dependencies              |
+| `npm run build`       | Build minified bundles ready for prod |
+| `npm start`           | Start a dev server with HMR           |
+| `npm run lint`        | Lint .ts/.tsx files with ESLint       |
+| `npm run lint:fix`    | Fix all fixable issues using ESLint   |
+| `npm run check-types` | Check for errors in ts/tsx files      |
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

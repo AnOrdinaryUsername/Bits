@@ -1,22 +1,53 @@
 {
   "name": "bits",
+  "homepage": "https://anordinaryusername.github.io/Bits/",
   "version": "1.0.0",
   "description": "A small website to understanding bits.",
-  "main": "index.ts",
-  "dependencies": {},
+  "main": "./src/index.tsx",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/uniqid": "^5.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-particles-js": "^3.4.1",
+    "react-router-dom": "^5.2.0",
+    "uniqid": "^5.2.0"
+  },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
     "eslint": "^7.8.1",
-    "ts-loader": "^8.0.3",
+    "eslint-plugin-react": "^7.21.5",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^2.0.0",
     "typescript": "^4.0.2",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "build": "webpack",
+    "bundle": "webpack",
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --mode=development --hot",
     "lint": "eslint --ext .ts,.tsx src",
-    "lint:fix": "eslint --ext .ts,.tsx src --fix"
+    "lint:fix": "eslint --ext .ts,.tsx src --fix",
+    "check-types": "tsc"
   },
   "repository": {
     "type": "git",
@@ -26,6 +57,5 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AnOrdinaryUsername/Bits/issues"
-  },
-  "homepage": "https://github.com/AnOrdinaryUsername/Bits#readme"
+  }
 }

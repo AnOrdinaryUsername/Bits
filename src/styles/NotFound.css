@@ -1,0 +1,15 @@
+.page-container {
+  height: auto;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  place-items: center;
+}
+
+.shrug {
+  font-size: 3em;
+  margin-bottom: 2rem;
+}
