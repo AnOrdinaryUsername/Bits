@@ -62,10 +62,7 @@ class ScientificNotationConverter {
             significandString += convertedForm[i];
         }
 
-        // Check if the string includes a "." since "1.26" is a float and not an int like "2"
-        this._form.significand = significandString.includes(".")
-            ? parseFloat(significandString)
-            : parseInt(significandString);
+        this._form.significand = Number(significandString);
 
         // Grab last char in string (e.g. the 7 in 1.26e+7) and return a number
         this._form.exponent = parseInt(convertedForm.slice(-1));
