@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styles from '../styles/NotFound.css';
 
 const NotFound = (): ReactElement => {
+    document.title = "🤷 Page Not Found | Bits";
     const path = useLocation().pathname;
 
     return (
