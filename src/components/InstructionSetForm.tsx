@@ -166,6 +166,7 @@ const InputTable = (props: InputTableProps): ReactElement => {
 };
 
 interface InstrSetState {
+    isSubmitted?: boolean
     classAInstructionCountSignificand: string,
     classAInstructionCountExponent: string,
     classAClockCyclesSignificand: string,
@@ -204,6 +205,7 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
     
         // nested state is bad kids
         this.state = {
+            isSubmitted: false,
             // Class A Properties
             classAInstructionCountSignificand: "",
             classAInstructionCountExponent: "",
@@ -223,16 +225,6 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
             })           
         }
     }
-
-
-    grabUserInput = (event: ChangeEvent<HTMLInputElement>): void => {
-        const { name, value } = event.target;
-
-        this.setState(prevState => ({
-            ...prevState,
-            [name]: value,
-        }), () => console.log(`${name}: ${this.state[name]}`));
-    };
 
     createStateLiteral = (): StateLiteralData => {
         // Value returns a string and want a float/int so we pass it to the Number constructor.
@@ -274,8 +266,22 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
         return stateLiteral;
     };
 
+    grabUserInput = (event: ChangeEvent<HTMLInputElement>): void => {
+        const { name, value } = event.target;
+
+        this.setState(prevState => ({
+            ...prevState,
+            [name]: value,
+        }), () => console.log(`${name}: ${this.state[name]}`));
+    };
+    
+
     processInput = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
+
+        this.setState({
+            isSubmitted: true,
+        });
 
         const userInputValues = this.createStateLiteral();
         this.problem.evaluateAnswer(userInputValues);
@@ -304,7 +310,10 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
                     <InputTable inputValuesAndNames={this.state} 
                                     setObject={this.problem}
                                     onChange={this.grabUserInput} />
-                    <InputSubmit value={"Submit"}/>
+                    {this.state.isSubmitted 
+                        ? <button>Next Question</button>
+                        : <InputSubmit value={"Submit"}/>
+                    }
                 </Question>
             </FormBox>
         );
