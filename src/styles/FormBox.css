@@ -8,6 +8,14 @@
   position: relative;
 }
 
+@media (max-width: 360px) {
+  .form {
+    height: 100%;
+    max-width: none;
+    margin-top: 0;
+  }
+}
+
 .form--bg-shadow {
   box-shadow: 0 15px 35px hsla(0, 0%, 0%, 0.2);
 }
@@ -24,4 +32,10 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+}
+
+@media (max-width: 360px) {
+  .fieldset {
+    margin: 0;
+  }
 }
