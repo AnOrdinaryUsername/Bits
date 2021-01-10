@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Background from '../components/Background';
 import Header from '../components/Header';
 import { Home, HowItWorks, NotFound, Practice, Resources } from '../pages';
@@ -14,7 +14,7 @@ export default class App extends React.Component {
 
 	render(): ReactNode {
 		return (
-			<BrowserRouter basename={process.env.PUBLIC_URL}>
+			<HashRouter basename={process.env.PUBLIC_URL}>
 				<Header />
 				<main className={styles.main}>                            
 					<Switch>
@@ -38,7 +38,7 @@ export default class App extends React.Component {
 						</Route>
 					</Switch>
                 </main>
-			</BrowserRouter>
+			</HashRouter>
 		);
 	}
 }
