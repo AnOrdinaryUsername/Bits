@@ -7,6 +7,14 @@
   align-items: center;
 }
 
+@media (max-width: 360px) {
+  .question-container {
+    width: fit-content;
+    max-width: none;
+    margin: 2rem;
+  }
+}
+
 .legend {
   align-self: flex-start;
   margin-bottom: 1.2rem;
