@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = env => {
   const PRODUCTION = (env === 'production');
+  const FILENAME_HASH = PRODUCTION ? 'contenthash' : 'hash';
   const HASH_MODE = PRODUCTION ? 'contenthash' : 'chunkhash';
   
   return {
@@ -19,8 +20,8 @@ module.exports = env => {
           test: /\.css$/,
           use: [
             { loader: 'style-loader' },
-            { loader: "@teamsupercell/typings-for-css-modules-loader" },
-            { loader: "css-loader", options: { modules: true } },
+            { loader: '@teamsupercell/typings-for-css-modules-loader' },
+            { loader: 'css-loader', options: { modules: true } },
           ]
         },
         {
@@ -36,7 +37,7 @@ module.exports = env => {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     output: {
-      filename: `[name].[${HASH_MODE}].js`,
+      filename: `[name].[${FILENAME_HASH}].js`,
       chunkFilename: `[name].[${HASH_MODE}].js`,
       path: path.resolve(__dirname, 'dist'),
       publicPath: '',
@@ -61,7 +62,7 @@ module.exports = env => {
         cleanOnceBeforeBuildPatterns: ['**/*', '!images/**'],
       }),
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "src", "index.html"),
+        template: path.resolve(__dirname, 'src', 'index.html'),
         publicPath: "",
       }),
     ]
