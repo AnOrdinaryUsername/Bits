@@ -13,8 +13,8 @@ const Home = (): ReactElement => {
 };
 
 
-const LoadableHowItWorks = loadable(() => import(/* webpackChunkName: "how-it-works" */ 
-    './HowItWorks'), {
+const LoadableHowItWorks = loadable(() => import(/* webpackChunkName: "how-it-works",
+    webpackPrefetch: 3 */ './HowItWorks'), {
     resolveComponent: (components) => components.HowItWorks,
     fallback: <Loading />,
 });
@@ -24,8 +24,8 @@ const HowItWorks = (): ReactElement => {
 };
 
 
-const LoadableNotFound = loadable(() => import(/* webpackChunkName: "not-found" */
-    './NotFound'), {
+const LoadableNotFound = loadable(() => import(/* webpackChunkName: "not-found",
+    webpackPrefetch: 0 */ './NotFound'), {
     resolveComponent: (components) => components.NotFound,
     fallback: <Loading />,
 });
@@ -35,7 +35,8 @@ const NotFound = (): ReactElement => {
 };
 
 
-const LoadablePractice = loadable(() => import(/* webpackChunkName: "practice" */ './Practice'), {
+const LoadablePractice = loadable(() => import(/* webpackChunkName: "practice",
+    webpackPrefetch: 2 */ './Practice'), {
     resolveComponent: (components) => components.Practice,
     fallback: <Loading />,
 });
@@ -45,8 +46,8 @@ const Practice = (): ReactElement => {
 };
 
 
-const LoadableResources = loadable(() => import(/* webpackChunkName: "resources" */ 
-    './Resources'), {
+const LoadableResources = loadable(() => import(/* webpackChunkName: "resources",
+     webpackPrefetch: 1 */ './Resources'), {
     resolveComponent: (components) => components.Resources,
     fallback: <Loading />,
 });
