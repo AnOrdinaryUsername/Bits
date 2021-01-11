@@ -4,6 +4,8 @@ import { InstructionSetForm } from '../components/InstructionSetForm';
 
 
 const Practice = (): ReactElement => {
+    document.title = "Practice | Bits";
+
     return (
         <Background>
             <InstructionSetForm />

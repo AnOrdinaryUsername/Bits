@@ -157,6 +157,8 @@ class Canvas extends React.Component {
 
 
 const Home = (): ReactElement => {
+    document.title = "Bits";
+
     return (
         <section className={styles.hero}>
             <Canvas />
@@ -186,3 +188,4 @@ const Home = (): ReactElement => {
 export {
     Home
 };
+
