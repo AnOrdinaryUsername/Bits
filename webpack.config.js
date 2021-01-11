@@ -39,7 +39,7 @@ module.exports = env => {
       filename: `[name].[${HASH_MODE}].js`,
       chunkFilename: `[name].[${HASH_MODE}].js`,
       path: path.resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: '',
     },
     devServer: {
       contentBase: './src',
@@ -50,6 +50,11 @@ module.exports = env => {
       open: {
         app: [getApp(), '--incognito'],
       }
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
     },
     plugins: [
       new CleanWebpackPlugin({
