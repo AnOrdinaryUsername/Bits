@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Background from '../components/Background';
 import Header from '../components/Header';
 import { Home, HowItWorks, NotFound, Practice, Resources } from '../pages';
 import styles from '../styles/App.css';
@@ -9,7 +8,6 @@ import styles from '../styles/App.css';
 export default class App extends React.Component {
 	constructor(props: null) {
 		super(props);
-
 	}
 
 	render(): ReactNode {
@@ -25,9 +23,7 @@ export default class App extends React.Component {
 							<HowItWorks />
 						</Route>
 						<Route path="/practice">
-							<Background>
-								<Practice />
-							</Background>   
+							<Practice /> 
 						</Route>
 						<Route path="/resources">
 							<Resources />
@@ -37,7 +33,7 @@ export default class App extends React.Component {
 							<NotFound />
 						</Route>
 					</Switch>
-                </main>
+				</main>
 			</HashRouter>
 		);
 	}
