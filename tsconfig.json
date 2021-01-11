@@ -12,7 +12,7 @@
     "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "module": "es6",
+    "module": "CommonJS",
     "skipLibCheck": true,
     "moduleResolution": "node",
     "target": "es2016",
