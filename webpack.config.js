@@ -1,16 +1,21 @@
 const path = require('path');
 const os = require('os');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+
 
 module.exports = env => {
-  const PRODUCTION = (env === 'production');
-  const FILENAME_HASH = PRODUCTION ? 'contenthash' : 'hash';
+  const PRODUCTION = env.production;
+  const FILENAME_HASH = PRODUCTION ? 'contenthash' : 'fullhash';
   const HASH_MODE = PRODUCTION ? 'contenthash' : 'chunkhash';
   
   return {
     entry: './src/index.tsx',
-    devtool: (PRODUCTION) ? 'none' : 'inline-source-map',
+    devtool: (PRODUCTION) ? false : 'inline-source-map',
     module: {
       rules: [
         // style-loader to add all the styles  inside the style tag of the document
@@ -19,7 +24,7 @@ module.exports = env => {
         {
           test: /\.css$/,
           use: [
-            { loader: 'style-loader' },
+            { loader: (PRODUCTION) ?  MiniCssExtractPlugin.loader : 'style-loader' },
             { loader: '@teamsupercell/typings-for-css-modules-loader' },
             { loader: 'css-loader', options: { modules: true } },
           ]
@@ -53,13 +58,41 @@ module.exports = env => {
       }
     },
     optimization: {
-      splitChunks: {
-        chunks: 'all',
+      splitChunks: {   
+          chunks: "all",
       },
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            format: {
+              comments: /@license/i,
+            },
+          },
+          extractComments: true,
+        }),
+        new CssMinimizerPlugin({
+          sourceMap: (PRODUCTION) ? false : true,
+          minimizerOptions: {
+            preset: [
+              'default',
+              {
+                discardComments: { removeAll: true },
+              },
+            ],
+          },
+        }),
+      ],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
       new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: ['**/*', '!images/**'],
+      }),
+      new MiniCssExtractPlugin({
+        filename: `[name].[${FILENAME_HASH}].css`,
+        chunkFilename: `[name].[${HASH_MODE}].css`
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'src', 'index.html'),
