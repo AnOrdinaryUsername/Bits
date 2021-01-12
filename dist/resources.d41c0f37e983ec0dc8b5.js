@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{335:function(n,e,r){"use strict";r.r(e),r.d(e,"Resources",(function(){return s}));var u=r(0),o=r.n(u),s=function(){return o.a.createElement("div",null,"Links to helpful resources :)")}}}]);
