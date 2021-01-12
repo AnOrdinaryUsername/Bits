@@ -1,0 +1,1 @@
+(self.webpackChunkbits=self.webpackChunkbits||[]).push([[681],{8631:(t,e,s)=>{"use strict";s.r(e),s.d(e,{HowItWorks:()=>r});var n=s(7294),r=function(){return document.title="How it works | Bits",n.createElement("div",null,"Learn stuff :)")}}}]);
