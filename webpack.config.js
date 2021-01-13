@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = env => {
   const PRODUCTION = env.production;
@@ -17,7 +17,8 @@ module.exports = env => {
     devtool: (PRODUCTION) ? false : 'inline-source-map',
     module: {
       rules: [
-        // style-loader to add all the styles  inside the style tag of the document
+        // (PROD) MiniCssExtract for separate css files and lazy loading
+        // (DEV) style-loader to add all the styles inside the style tag of the document
         // typings-for-css-modules-loader to generate automatic type definitions
         // css-loader to bundle all the css files into one file
         {
@@ -47,9 +48,8 @@ module.exports = env => {
       publicPath: '',
     },
     devServer: {
-      contentBase: './src',
-      inline: true,
-      liveReload: false,
+      contentBase: path.join(__dirname, 'dist'),
+      overlay: true,
       writeToDisk: true,
       historyApiFallback: true,
       open: {
@@ -83,6 +83,7 @@ module.exports = env => {
       ],
     },
     plugins: [
+      !PRODUCTION && new ReactRefreshWebpackPlugin(),
       new webpack.ProvidePlugin({
         process: 'process/browser',
       }),
@@ -97,7 +98,7 @@ module.exports = env => {
         template: path.resolve(__dirname, 'src', 'index.html'),
         publicPath: '',
       }),
-    ]
+    ].filter(Boolean), // Remove ReactRefresh if it's production.
   }
 };
 
