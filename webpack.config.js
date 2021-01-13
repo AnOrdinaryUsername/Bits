@@ -5,13 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 module.exports = env => {
   const PRODUCTION = env.production;
-  const FILENAME_HASH = PRODUCTION ? 'contenthash' : 'fullhash';
-  const HASH_MODE = PRODUCTION ? 'contenthash' : 'chunkhash';
+  const NAME_MODE = PRODUCTION ? '[name].[contenthash]' : '[name]';
   
   return {
     entry: './src/index.tsx',
@@ -30,7 +29,7 @@ module.exports = env => {
           ]
         },
         {
-          test: /\.(ts|js)x?$/,
+          test: /\.(tsx|ts)?$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader'
@@ -42,8 +41,8 @@ module.exports = env => {
       extensions: ['.tsx', '.ts', '.jsx', '.js'],
     },
     output: {
-      filename: `[name].[${FILENAME_HASH}].js`,
-      chunkFilename: `[name].[${HASH_MODE}].js`,
+      filename: `${NAME_MODE}.js`,
+      chunkFilename: `${NAME_MODE}.js`,
       path: path.resolve(__dirname, 'dist'),
       publicPath: '',
     },
@@ -59,7 +58,7 @@ module.exports = env => {
     },
     optimization: {
       splitChunks: {   
-          chunks: "all",
+          chunks: 'all',
       },
       minimizer: [
         new TerserPlugin({
@@ -91,12 +90,12 @@ module.exports = env => {
         cleanOnceBeforeBuildPatterns: ['**/*', '!images/**'],
       }),
       new MiniCssExtractPlugin({
-        filename: `[name].[${FILENAME_HASH}].css`,
-        chunkFilename: `[name].[${HASH_MODE}].css`
+        filename: `${NAME_MODE}.css`,
+        chunkFilename: `${NAME_MODE}.css`,
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, 'src', 'index.html'),
-        publicPath: "",
+        publicPath: '',
       }),
     ]
   }
