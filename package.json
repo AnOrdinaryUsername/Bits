@@ -56,6 +56,7 @@
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json dist",
     "build": "webpack --env production --mode=production",
     "deploy": "gh-pages -d dist",
+    "docker-start": "webpack serve --mode=development --host 0.0.0.0 --progress --hot",
     "start": "webpack serve --mode=development --progress --hot",
     "lint": "eslint --ext .ts,.tsx src",
     "lint:fix": "eslint --ext .ts,.tsx src --fix",
