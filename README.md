@@ -19,17 +19,9 @@ Bits is a simple website designed to help people understand binary digits. Learn
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Setting up your dev environment
+## Setting up your dev environment
 
-If you ever get lost, follow Github's [Fork a repo](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) guide.
-
-We'll also be using [npm](https://www.npmjs.com/get-npm) and [Git](https://git-scm.com/downloads) so make sure you have those installed.
-
-#### Clone the repo
-
-First click the "fork" button to create your own copy of the project.
-
-Then use ssh
+Clone the repo with ssh
 
 ```bash
 git clone git@github.com:your-username/Bits.git
@@ -47,60 +39,65 @@ Change to the Bits directory
 cd Bits
 ```
 
+### Using NPM
+
 In the repo folder run
 
 ```bash
 npm install
 ```
 
-Add the upstream repository
+Then start up the dev server. It should automatically open [http://localhost:8080](http://localhost:8080) in Google Chrome Incognito mode.
 
 ```bash
-git remote add upstream https://github.com/AnOrdinaryUsername/Bits.git
+npm start
 ```
 
-#### Develop your contribution
+### Using Docker
 
-Pull the latest changes from upstream
+In the repo folder run
 
 ```bash
-git checkout master
-git pull upstream master
+docker-compose up
 ```
 
-Create a branch for feature you want to work on
+And now go to [http://localhost:8080](http://localhost:8080)
+
+#### Stop the server
+
+To stop dev server and remove the Docker container run
 
 ```bash
-git checkout -b branch-feature-name
+docker-compose down
 ```
 
-Commit any changes as you make the feature. For a good commit message, use this helpful [guide](https://chris.beams.io/posts/git-commit/).
+To temporarily stop the dev server and NOT remove the Docker container run
 
 ```bash
-git add fileName.ts
-git commit -m "Meaningful message here"
+docker-compose stop
 ```
 
-#### Submit your contribution
-
-Push changes to your fork
-
-```bash
-git push origin your-branch-feature-name
-```
-
-Now click the green pull request button, add your title and message, and submit your changes!
+You can then bring the server back up with `docker-compose up`.
 
 #### Commands
 
-| Command               | Description                           |
-| --------------------- | ------------------------------------- |
-| `npm install`         | Install the dependencies              |
-| `npm run build`       | Build minified bundles ready for prod |
-| `npm start`           | Start a dev server with HMR           |
-| `npm run lint`        | Lint .ts/.tsx files with ESLint       |
-| `npm run lint:fix`    | Fix all fixable issues using ESLint   |
-| `npm run check-types` | Check for errors in ts/tsx files      |
+| Command                | Description                           |
+| ---------------------- | ------------------------------------- |
+| `npm install`          | Install the dependencies              |
+| `npm start`            | Start a dev server with HMR           |
+| `npm run analyze`      | Analyze bundle sizes                  |
+| `npm run build`        | Build minified bundles ready for prod |
+| `npm run check-types`  | Check for errors in ts/tsx files      |
+| `npm run deploy`       | Deploy contents of dist to gh-pages   |
+| `npm run docker-start` | Used for Dockerfile                   |
+| `npm run lint`         | Lint .ts/.tsx files with ESLint       |
+| `npm run lint:fix`     | Fix all fixable issues using ESLint   |
+
+These commands also work with Docker. Here's a command that builds for production.
+
+```bash
+docker-compose run web npm run build
+```
 
 ## License
 
