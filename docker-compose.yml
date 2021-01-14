@@ -4,6 +4,6 @@ services:
   web:
     build: .
     volumes:
-      - .:/src
+      - .:/Bits
     ports:
       - 8080:8080
