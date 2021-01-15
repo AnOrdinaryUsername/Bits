@@ -7,6 +7,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
 
 module.exports = env => {
   const PRODUCTION = env.production;
@@ -21,12 +23,14 @@ module.exports = env => {
         // (DEV) style-loader to add all the styles inside the style tag of the document
         // typings-for-css-modules-loader to generate automatic type definitions
         // css-loader to bundle all the css files into one file
+        // postcss-loader to generate vendor prefixes based on browser support
         {
           test: /\.css$/,
           use: [
             { loader: (PRODUCTION) ?  MiniCssExtractPlugin.loader : 'style-loader' },
             { loader: '@teamsupercell/typings-for-css-modules-loader' },
             { loader: 'css-loader', options: { modules: true } },
+            { loader: 'postcss-loader', options: { postcssOptions: { plugins: [ autoprefixer ] } } },
           ]
         },
         {
