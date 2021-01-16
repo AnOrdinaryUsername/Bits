@@ -47,9 +47,11 @@
     "eslint": "^7.17.0",
     "eslint-plugin-compat": "^3.9.0",
     "eslint-plugin-react": "^7.22.0",
+    "express": "^4.17.1",
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^5.0.0-beta.4",
     "mini-css-extract-plugin": "^1.3.3",
+    "open": "^7.3.1",
     "postcss": "^8.2.4",
     "postcss-loader": "^4.1.0",
     "process": "^0.11.10",
@@ -66,13 +68,14 @@
   "scripts": {
     "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json dist",
     "build": "webpack --env production --mode=production",
+    "check-types": "tsc",
     "deploy": "gh-pages -d dist",
-    "docker-start": "webpack serve --mode=development --host 0.0.0.0 --progress --hot",
-    "start": "webpack serve --mode=development --progress --hot",
+    "docker-init": "webpack serve --mode=development --host 0.0.0.0 --progress --hot",
     "lint-css": "stylelint \"**/*.css\"",
     "lint-js": "eslint --ext .ts,.tsx src",
     "lint-js:fix": "eslint --ext .ts,.tsx src --fix",
-    "check-types": "tsc"
+    "start": "webpack serve --mode=development --progress --hot",
+    "start-prod": "node app.js"
   },
   "repository": {
     "type": "git",

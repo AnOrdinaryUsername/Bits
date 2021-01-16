@@ -13,4 +13,4 @@ COPY . .
 EXPOSE 8080
 
 # Default command that starts webpack-dev-server
-CMD ["npm", "run", "docker-start"]
+CMD ["npm", "run", "docker-init"]
