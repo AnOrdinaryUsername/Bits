@@ -17,12 +17,12 @@ jobs:
       # Use node for commands in package.json
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
-      
-        - name: Build site
-          run: |
-              npm install
-              npm run build
+          node-version: "14.x"
+
+      - name: Build site
+        run: |
+          npm install
+          npm run build
 
       - name: Deploy 🥳🎉
         uses: JamesIves/github-pages-deploy-action@3.7.1
