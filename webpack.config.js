@@ -57,7 +57,7 @@ module.exports = env => {
       writeToDisk: true,
       historyApiFallback: true,
       open: {
-        app: [getApp(), '--incognito'],
+        app: [getChromeBrowser(), '--incognito'],
       }
     },
     optimization: {
@@ -106,7 +106,7 @@ module.exports = env => {
   }
 };
 
-function getApp() {
+function getChromeBrowser() {
   const platform = process.platform;
   let app = '';
 
