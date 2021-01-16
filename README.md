@@ -39,7 +39,7 @@ Change to the Bits directory
 cd Bits
 ```
 
-### Using NPM
+### Using npm
 
 In the repo folder run
 
@@ -81,23 +81,31 @@ You can then bring the server back up with `docker-compose up`.
 
 #### Commands
 
-| Command                | Description                           |
-| ---------------------- | ------------------------------------- |
-| `npm install`          | Install the dependencies              |
-| `npm start`            | Start a dev server with HMR           |
-| `npm run analyze`      | Analyze bundle sizes                  |
-| `npm run build`        | Build minified bundles ready for prod |
-| `npm run check-types`  | Check for errors in ts/tsx files      |
-| `npm run deploy`       | Deploy contents of dist to gh-pages   |
-| `npm run docker-start` | Used for Dockerfile                   |
-| `npm run lint`         | Lint .ts/.tsx files with ESLint       |
-| `npm run lint:fix`     | Fix all fixable issues using ESLint   |
+| Command               | Description                           |
+| --------------------- | ------------------------------------- |
+| `npm install`         | Install the dependencies              |
+| `npm start`           | Start a dev server with HMR           |
+| `npm run analyze`     | Analyze bundle sizes                  |
+| `npm run build`       | Build minified bundles ready for prod |
+| `npm run check-types` | Check for errors in ts/tsx files      |
+| `npm run deploy`      | Deploy contents of dist to gh-pages   |
+| `npm run docker-init` | Used for Dockerfile                   |
+| `npm run lint-css`    | Check for browser compatibilty        |
+| `npm run lint-js`     | Lint .ts/.tsx files with ESLint       |
+| `npm run lint-js:fix` | Fix all fixable issues using ESLint   |
+| `npm run start-prod`  | Start a local prod server             |
 
 These commands also work with Docker. Here's a command that builds for production.
 
 ```bash
 docker-compose run web npm run build
 ```
+
+## ~~Frequently~~ Asked Question
+
+### Isn't this overkill for a small site?
+
+Yes.
 
 ## License
 
