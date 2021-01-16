@@ -21,7 +21,7 @@ class Canvas extends React.Component {
         window.removeEventListener("resize", this.updateWindowDimensions);
     };
 
-    updateWindowDimensions = () => {
+    updateWindowDimensions = (): void => {
         this.setState({
             width: `${window.innerWidth}px`,
             height: `${window.innerHeight}px`
