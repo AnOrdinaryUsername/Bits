@@ -1,0 +1,32 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  integration:
+    runs-on: windows-latest
+    steps:
+      # Checkout project source code
+      - uses: actions/checkout@v2
+
+      # Use node for commands in package.json
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - run: npm install
+
+      - name: Lint js
+        run: npm run lint-js
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint css
+        run: npm run lint-css
