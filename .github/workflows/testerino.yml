@@ -1,0 +1,14 @@
+name: GitHub Actions Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello_world_job:
+    runs-on: windows-latest
+    steps:
+      - name: How cute
+        run: |
+          echo "O kawaii koto"
