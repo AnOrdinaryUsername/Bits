@@ -71,7 +71,7 @@
     "check-types": "tsc",
     "deploy": "gh-pages -d dist",
     "docker-init": "webpack serve --mode=development --host 0.0.0.0 --progress --hot",
-    "lint-css": "stylelint \"**/*.css\"",
+    "lint-css": "stylelint \"dist/*.css\"",
     "lint-js": "eslint --ext .ts,.tsx src",
     "lint-js:fix": "eslint --ext .ts,.tsx src --fix",
     "start": "webpack serve --mode=development --progress --hot",
