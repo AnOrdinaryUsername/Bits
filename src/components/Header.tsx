@@ -101,7 +101,7 @@ interface MobileNavbarState {
     isToggled: boolean;
 }
 
-class MobileNavbar extends React.Component<null, MobileNavbarState> {
+class MobileNavbar extends React.Component<{}, MobileNavbarState> {
     state = {
         isToggled: false,
     };

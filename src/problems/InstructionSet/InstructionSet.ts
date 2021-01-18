@@ -1,8 +1,8 @@
+import { StateLiteralData } from '../../components/InstructionSetForm';
+import Problem from '../../types/Problem';
+import Result from '../../types/Result';
 import { getRandomDecimal, getRandomInt } from '../../utils/RandomNumGen';
 import { ScientificNotation, ScientificNotationConverter } from '../../utils/ScientificNotation';
-import { StateLiteralData } from '../InstructionSetForm';
-import Problem from './Problem';
-import Result from './Result';
 
 export interface InstructionClassData {
     [key: string]: string;
