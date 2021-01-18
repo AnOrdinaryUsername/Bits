@@ -20,5 +20,22 @@ module.exports = {
       react: {
         version: 'detect',
       }
-    }
+    },
+    overrides: [
+      {
+        files: ["**/*.tsx"],
+        excludedFiles: ".ts",
+        rules: {
+          "@typescript-eslint/ban-types": [
+          "error",
+            {
+              extendDefaults: true,
+              types: {
+                "{}": false
+              }
+            }
+          ]
+        }
+      }
+    ]
   };
