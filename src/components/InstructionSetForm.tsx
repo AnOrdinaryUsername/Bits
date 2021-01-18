@@ -1,11 +1,11 @@
 import React, { ChangeEvent, ReactElement, ReactNode } from 'react';
 import uniqid from 'uniqid';
+import { InstructionClassData, InstructionSet } from '../problems';
 import anim from '../styles/Animation.css';
 import { OnChangeEvent } from '../types/Events';
 import { ScientificNotation } from '../utils/ScientificNotation';
 import FormBox from './FormBox';
 import { InputSubmit, InputText } from './InputsAndButtons';
-import { InstructionClassData, InstructionSet } from './problems';
 import { Question } from './Question';
 import { Table, TableBody, TableData, TableDataCell, TableHead, TableRow } from './Table';
 

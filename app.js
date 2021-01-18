@@ -1,3 +1,4 @@
+const compression = require('compression');
 const express = require("express");
 const open = require("open");
 const os = require('os');
@@ -6,6 +7,9 @@ const app = express();
 
 (async () => {
     const PORT = 8080;
+
+    // Allows us to test for gzip.
+    app.use(compression());
     app.use(express.static("dist"));
 
     app.listen(PORT, () => {
@@ -24,7 +28,7 @@ function getChromeBrowser() {
 
         // For Windows Subsystem for Linux (WSL)
         if (os.release().toLowerCase().includes('microsoft')) {
-        app = '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe';
+            app = '/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe';
         }
         // MacOS
     } else if (platform === 'darwin') {

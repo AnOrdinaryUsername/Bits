@@ -1,13 +1,15 @@
 const path = require('path');
 const os = require('os');
 const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const CompressionPlugin = require("compression-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 module.exports = env => {
@@ -102,7 +104,12 @@ module.exports = env => {
         template: path.resolve(__dirname, 'src', 'index.html'),
         publicPath: '',
       }),
-    ].filter(Boolean), // Remove ReactRefresh if it's production.
+      PRODUCTION && new BundleAnalyzerPlugin({
+        analyzerMode: "disabled",
+        generateStatsFile: true,
+      }),
+      PRODUCTION && new CompressionPlugin(),
+    ].filter(Boolean), // Remove any booleans in plugins.
   }
 };
 

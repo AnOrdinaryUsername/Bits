@@ -6,7 +6,7 @@ import styles from '../styles/App.css';
 
 
 export default class App extends React.Component {
-	constructor(props: null) {
+	constructor(props: {}) {
 		super(props);
 	}
 
