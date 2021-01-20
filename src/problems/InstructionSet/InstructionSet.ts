@@ -1,171 +1,8 @@
 import { StateLiteralData } from '../../components/InstructionSetForm';
 import Problem from '../../types/Problem';
-import Result from '../../types/Result';
 import { getRandomDecimal, getRandomInt } from '../../utils/RandomNumGen';
-import { ScientificNotation, ScientificNotationConverter } from '../../utils/ScientificNotation';
-
-export interface InstructionClassData {
-    [key: string]: string;
-}
-
-class InstructionClass {
-    readonly className: string;
-    readonly cpi: number;
-    public instructionPercent: number;
-    // The results
-    private _instructionCount: InstructionCountAnswer;
-    private _clockCycles: ClockCyclesAnswer;
-
-    constructor(className: string) {
-        this.className = className;
-        this.instructionPercent = this.getRandomPercentage();
-        this.cpi = this.getRandomCpi();
-
-        this._instructionCount = new InstructionCountAnswer();
-        this._clockCycles = new ClockCyclesAnswer();
-    }
-
-    private getRandomCpi = (): number => {
-        const [MIN_CPI, MAX_CPI] = [1, 3];
-
-        return getRandomDecimal(MIN_CPI, MAX_CPI);
-    };
-
-    public getRandomPercentage = (min = 5, max = 16): number => {
-        const MULTIPLE = 5;
-        // Grab a random multiple of 5 in the range from 25-80
-        return getRandomInt(min, max) * MULTIPLE;
-    };
-
-    public grabData = (): InstructionClassData => {
-        return ({
-            name: this.className,
-            cpi: this.cpi.toString(),
-            instructionPercent: this.instructionPercent.toString() + "%",
-        });
-    };
-
-    public get instructionCount(): InstructionCountAnswer {
-        return this._instructionCount;
-    }
-
-    public get clockCycles(): ClockCyclesAnswer {
-        return this._clockCycles;
-    }
-}
-
-interface Solutions {
-    userSolution: ScientificNotation;
-    actualSolution: ScientificNotation;
-}
-
-class InstructionCountAnswer implements Result, Solutions {
-    public answer: {
-        isRight: boolean;
-    };
-
-    public userSolution: ScientificNotation;
-    public actualSolution: ScientificNotation;
-
-    constructor() {
-        this.answer = {
-            isRight: false,
-        };
-
-        this.userSolution = {
-            significand: undefined,
-            exponent: undefined,
-        };
-
-        this.actualSolution = {
-            significand: undefined,
-            exponent: undefined,
-        };
-    }
-
-    private createSolution = (classObject: InstructionClass, setObject: InstructionSet): void => {
-        const TWO_DECIMAL_PLACE = 100;
-        const BASE = 10;
-        const ROUND_AMOUNT = 2;
-
-        const decimalPercent = classObject.instructionPercent / TWO_DECIMAL_PLACE;
-
-        // Convert scientific notation to decimal notation for calculations
-        const { significand, exponent } = setObject.dynamicInstructionCount;
-        const decimalDynamicInstructionCount = significand * (BASE ** exponent)
-
-        const decimalInstructionCount = decimalDynamicInstructionCount * decimalPercent;
-
-        const converter = new ScientificNotationConverter();
-        this.actualSolution = converter.generateForm(decimalInstructionCount, ROUND_AMOUNT);
-    };
-
-    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,
-        setObject: InstructionSet): void => {
-        this.createSolution(classObject, setObject);
-
-        this.userSolution = userInput;
-
-        // JSON.stringify is good enough for this job, otherwise create a more robust check for more
-        // complex objects. Remember, order is important here.
-        if (JSON.stringify(this.actualSolution) === JSON.stringify(this.userSolution)) {
-            this.answer.isRight = true;
-        } else {
-            this.answer.isRight = false;
-        }
-    };
-}
-
-
-class ClockCyclesAnswer implements Result, Solutions {
-    public answer: {
-        isRight: boolean;
-    };
-
-    public userSolution: ScientificNotation;
-    public actualSolution: ScientificNotation;
-
-    constructor() {
-        this.answer = {
-            isRight: false,
-        };
-
-        this.userSolution = {
-            significand: undefined,
-            exponent: undefined,
-        };
-
-        this.actualSolution = {
-            significand: undefined,
-            exponent: undefined,
-        };
-    }
-
-    private createSolution = (instrObject: InstructionClass): void => {
-        const { significand, exponent } = instrObject.instructionCount.actualSolution;
-        const BASE = 10;
-        const ROUND_AMOUNT = 2;
-
-        const decimalInstructionCount = significand * (BASE ** exponent);
-        const decimalClockCycles = decimalInstructionCount * instrObject.cpi;
-
-        const converter = new ScientificNotationConverter();
-        this.actualSolution = converter.generateForm(decimalClockCycles, ROUND_AMOUNT);
-    };
-
-    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,): void => {
-        this.createSolution(classObject);
-
-        this.userSolution = userInput;
-
-        if (JSON.stringify(this.actualSolution) === JSON.stringify(this.userSolution)) {
-            this.answer.isRight = true;
-        } else {
-            this.answer.isRight = false;
-        }
-    };
-}
-
+import { ScientificNotation } from '../../utils/ScientificNotation';
+import { InstructionClass } from './InstructionClass';
 
 export interface InstructionSetData {
     dynamicInstructionCount: ScientificNotation;
@@ -217,18 +54,29 @@ export class InstructionSet implements Problem, InstructionSetData {
     };
 
     public generateProblem = (): void => {
+        const { classA, classB, classC } = this;
+        const MAX_PERCENT = 100;
+
         if (!this.isClassCPresent) {
-            this.classB.instructionPercent = 100 - this.classA.instructionPercent;
+            classB.instructionPercent = MAX_PERCENT - this.classA.instructionPercent;
             return;
         }
 
         const MULTIPLE = 5;
-        const startPercentage = (this.classA.instructionPercent / MULTIPLE) - 2;
-        this.classB.instructionPercent = this.classB.getRandomPercentage(undefined, startPercentage);
+        const LOWER_BOUND = 2; // aka 10%
+        const CLASS_B_LIMIT = 12 * MULTIPLE;
 
+        let upperBound = null;
+        if (classA.instructionPercent > CLASS_B_LIMIT) {
+            upperBound = 3;
+            classB.instructionPercent = classB.getRandomPercentage(LOWER_BOUND, upperBound);
+        } else {
+            upperBound = 5;
+            classB.instructionPercent = classB.getRandomPercentage(LOWER_BOUND, upperBound);
+        }
 
-        const remainingPercent = 100 - (this.classA.instructionPercent + this.classB.instructionPercent);
-        this.classC.instructionPercent = remainingPercent;
+        const remainingPercent = MAX_PERCENT - (classA.instructionPercent + classB.instructionPercent);
+        classC.instructionPercent = remainingPercent;
     };
 
     public evaluateAnswer = (userInput: StateLiteralData): void => {
