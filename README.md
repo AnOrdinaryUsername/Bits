@@ -94,6 +94,7 @@ You can then bring the server back up with `docker-compose up`.
 | `npm run lint-js`     | Lint .ts/.tsx files with ESLint       |
 | `npm run lint-js:fix` | Fix all fixable issues using ESLint   |
 | `npm run start-prod`  | Start a local prod server             |
+| `npm run test`        | Run all jest tests                    |
 
 These commands also work with Docker. Here's a command that builds for production.
 

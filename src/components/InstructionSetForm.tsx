@@ -1,6 +1,6 @@
 import React, { ChangeEvent, ReactElement, ReactNode } from 'react';
 import uniqid from 'uniqid';
-import { InstructionClassData, InstructionSet } from '../problems';
+import { InstructionClassData, InstructionSet } from '../problems/InstructionSet';
 import anim from '../styles/Animation.css';
 import { OnChangeEvent } from '../types/Events';
 import { ScientificNotation } from '../utils/ScientificNotation';

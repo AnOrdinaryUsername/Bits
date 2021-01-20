@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
@@ -19,6 +19,7 @@ module.exports = env => {
   return {
     entry: './src/index.tsx',
     devtool: (PRODUCTION) ? false : 'inline-source-map',
+    target: (PRODUCTION) ? 'browserslist' : 'web',
     module: {
       rules: [
         // (PROD) MiniCssExtract for separate css files and lazy loading
@@ -105,7 +106,7 @@ module.exports = env => {
         publicPath: '',
       }),
       PRODUCTION && new BundleAnalyzerPlugin({
-        analyzerMode: "disabled",
+        analyzerMode: 'disabled',
         generateStatsFile: true,
       }),
       PRODUCTION && new CompressionPlugin(),
