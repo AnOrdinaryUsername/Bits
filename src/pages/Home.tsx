@@ -29,6 +29,9 @@ class Canvas extends React.Component {
     };
 
     render(): ReactNode {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const speedMode = (reducedMotion) ? 0 : 1;
+
         return (
             <Particles
             {...this.state}
@@ -87,7 +90,7 @@ class Canvas extends React.Component {
                   },
                   move: {
                     enable: true,
-                    speed: 1,
+                    speed: speedMode,
                     direction: "none",
                     random: false,
                     straight: false,
@@ -186,6 +189,6 @@ const Home = (): ReactElement => {
 };
 
 export {
-    Home
+  Home
 };
 

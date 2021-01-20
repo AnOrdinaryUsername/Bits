@@ -55,6 +55,18 @@ table {
   box-sizing: border-box;
 }
 
+@media screen and (prefers-reduced-motion: reduce), (update: slow) {
+  *,
+  *:before,
+  *:after {
+      animation-duration: 0s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+      animation-delay: 0s !important;
+  }
+}
+
 html {
   /* hsl(209, 56%, 92%) */
   background-color: hsl(200, 12%, 95%);
