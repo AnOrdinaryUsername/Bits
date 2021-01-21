@@ -4,7 +4,7 @@
   position: relative;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 456px) {
   .background {
     flex: 1;
   }
@@ -14,7 +14,7 @@
   background-color: hsl(209, 56%, 85%);
 }
 
-@media (max-width: 360px) {
+@media (max-width: 456px) {
   .background--color {
     background-color: inherit;
   }
@@ -28,7 +28,7 @@
   width: 100%;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 456px) {
   .svg-wrapper {
     display: none;
   }
@@ -39,7 +39,7 @@
   min-height: 10rem;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 456px) {
   .height-filler {
     display: none;
   }

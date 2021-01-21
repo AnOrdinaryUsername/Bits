@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 456px) {
   .question-container {
     width: fit-content;
     max-width: none;
