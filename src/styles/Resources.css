@@ -1,0 +1,160 @@
+.title {
+  align-items: center;
+  /* background-color: hsl(34, 63%, 81%); */
+  background-color: hsl(239, 63%, 81%);
+  display: flex;
+  flex-flow: column nowrap;
+  font-weight: 300;
+  line-height: 1.4;
+  padding: 4.8rem 10%;
+}
+
+.title--shadow {
+  box-shadow: inset 0 -15px 0 hsl(239, 63%, 91%);
+}
+
+@media (max-width: 456px) {
+  .title {
+    padding: 3.2rem 10%;
+  }
+}
+
+.title__heading {
+  font-size: 2.5em;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: normal;
+}
+
+.title__description {
+  font-size: 1.5em;
+  margin-bottom: 1.2rem;
+  margin-top: 0.25em;
+  text-align: center;
+}
+
+@media (max-width: 456px) {
+  .title__heading {
+    font-size: 2em;
+  }
+
+  .title__description {
+    font-size: 1.25em;
+  }
+}
+
+.content-container {
+  flex: 1;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 3.6rem auto;
+  max-width: 67.5rem;
+}
+
+.content section {
+  align-items: baseline;
+  display: flex;
+  flex-flow: column wrap;
+  margin-bottom: 3.2rem;
+  padding: 0 10%;
+  width: 100%;
+}
+
+.group-name {
+  box-shadow: inset 0 -15px 0 hsl(239, 63%, 91%);
+  line-height: 1.4;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 456px) {
+  .group-name {
+    font-size: 1.75em;
+  }
+}
+
+/* Prevents additional margin from being added to container. */
+section .resource:last-child {
+  margin-bottom: 0;
+}
+
+.resource {
+  margin-bottom: 2.4rem;
+  margin-left: 2.4rem;
+}
+
+.resource__link {
+  color: hsl(0, 0%, 0%);
+  text-decoration: underline;
+  text-decoration-color: hsl(286, 50%, 77%);
+  text-decoration-thickness: 0.2rem;
+  text-underline-offset: 5px;
+}
+
+.resource__title {
+  width: fit-content;
+}
+
+.resource__title:hover {
+  background-color: hsl(286, 60%, 87%);
+}
+
+.resource__description {
+  margin-top: 0.4rem;
+}
+
+.suggestion {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .suggestion {
+    align-items: center;
+    border-radius: 1.2rem;
+    border: 2px solid hsl(0, 0%, 0%);
+    box-shadow: 0.5rem 0.5rem 0 0 hsl(0, 0%, 0%);
+    display: flex;
+    flex-flow: column wrap;
+    left: 70%;
+    margin-right: 5%;
+    max-width: 30rem;
+    padding: 1.5%;
+    position: absolute;
+    top: 35%;
+  }
+}
+
+.suggestion__text {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.suggestion__button {
+  border: 3px solid hsl(60, 6%, 19%);
+  box-shadow: 0.3rem 0.3rem 0 0 hsl(60, 6%, 19%);
+  color: hsl(0, 0%, 0%);
+  padding: .6rem 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.suggestion__button:hover {
+  background-color: hsl(60, 6%, 19%);
+  color: hsl(0, 0%, 100%);
+}
+
+/* Bottom button only appears on anything below large devices */
+.suggestion__button--bottom {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .suggestion__button--bottom {
+    display: block;
+    margin: auto;
+    width: max-content;
+  }
+}
