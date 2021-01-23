@@ -69,7 +69,7 @@ table {
 
 html {
   /* hsl(209, 56%, 92%) */
-  background-color: hsl(200, 12%, 95%);
+  background-color: hsl(210, 29%, 97%);
   display: flex;
   font-size: 62.5%;
   min-height: 100%;
@@ -107,6 +107,19 @@ body {
 a {
   text-decoration: none;
   color: white;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.25em;
 }
 
 legend {

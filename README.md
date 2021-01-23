@@ -11,7 +11,7 @@ Bits is a simple website designed to help people understand binary digits. Learn
 ## Features
 
 - [x] Generate practice problems
-- [ ] Include helpful resources page
+- [x] Include helpful resources page
 - [ ] Add a page that explains how bits works
 - [x] Create a home page and navbar
 

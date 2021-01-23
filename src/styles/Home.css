@@ -27,14 +27,8 @@
   background-color: hsla(273, 22%, 8%, 0.3);
   display: grid;  
   max-width: 60rem;
-  margin-left: 10%;
+  margin: 10%;
   place-items: center;
-}
-
-@media (max-width: 456px) {
-  .hero-content {
-    margin: 3rem;
-  }
 }
 
 .hero-content h1 {

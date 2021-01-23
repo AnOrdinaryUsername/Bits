@@ -129,13 +129,13 @@ class MobileNavbar extends React.Component<{}, MobileNavbarState> {
         setTimeout(() => {
             this.setState(prevState => ({
                 isToggled: !prevState.isToggled,
-        }), () => {
-            if (this.state.isToggled) {
-                document.body.classList.add(styles['hide-scrollbar']);
-            } else {
-                document.body.classList.remove(styles['hide-scrollbar']);
-            }
-        });
+            }), () => {
+                if (this.state.isToggled) {
+                    document.body.classList.add(styles['hide-scrollbar']);
+                } else {
+                    document.body.classList.remove(styles['hide-scrollbar']);
+                }
+            });
         }, 10);
     };
 
