@@ -1,27 +1,41 @@
 import { InstructionSet } from './InstructionSet';
 
+interface InstructionPercents {
+    classA: number;
+    classB: number;
+    classC?: number;
+}
+
 describe('Instruction percent', () => {
-    const setObject = new InstructionSet();
+    function grabInstructionPercents(): InstructionPercents {
+        const problem = new InstructionSet();
+        problem.generateProblem();
 
-    setObject.generateProblem();
-    const { classA, classB, classC } = { ...setObject };
+        const { classA, classB, classC, isClassCPresent } = { ...problem };
 
-    it('should not be negative', () => {
-        expect(classA.instructionPercent).not.toBeLessThan(0);
-        expect(classB.instructionPercent).not.toBeLessThan(0);
-
-        if (setObject.isClassCPresent) {
-            expect(classC.instructionPercent).not.toBeLessThan(0);
+        if (isClassCPresent) {
+            return {
+                classA: classA.instructionPercent,
+                classB: classB.instructionPercent,
+                classC: classC.instructionPercent,
+            };
         }
+
+        return {
+            classA: classA.instructionPercent,
+            classB: classB.instructionPercent,
+        };
+    }
+
+    const percents = Object.values(grabInstructionPercents());
+
+    it('should not be negative or 0', () => {
+        percents.forEach((element) => expect(element).not.toBeLessThanOrEqual(0));
     });
 
     it('should add up to 100', () => {
-        let result = classA.instructionPercent + classB.instructionPercent;
+        const percentTotal = percents.reduce((total, currentValue) => total + currentValue);
 
-        if (setObject.isClassCPresent) {
-            result += classC.instructionPercent;
-        }
-
-        expect(result).toEqual(100);
+        expect(percentTotal).toBe(100);
     });
 });
