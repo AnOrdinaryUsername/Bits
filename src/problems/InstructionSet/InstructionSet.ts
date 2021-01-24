@@ -20,11 +20,11 @@ export class InstructionSet implements Problem, InstructionSetData {
     readonly clockRate: number;
 
     constructor() {
-        this.classA = new InstructionClass("A");
-        this.classB = new InstructionClass("B");
+        this.classA = new InstructionClass('A');
+        this.classB = new InstructionClass('B');
 
         if (getRandomInt(0, 1) === 1) {
-            this.classC = new InstructionClass("C");
+            this.classC = new InstructionClass('C');
             this.isClassCPresent = true;
         }
 
@@ -41,10 +41,10 @@ export class InstructionSet implements Problem, InstructionSetData {
         const [exponent_START, exponent_END] = [5, 7];
         const randomexponent = getRandomInt(exponent_START, exponent_END);
 
-        return ({
+        return {
             significand: randomSignificand,
             exponent: randomexponent,
-        });
+        };
     };
 
     private getRandomClockRate = (): number => {
@@ -75,7 +75,8 @@ export class InstructionSet implements Problem, InstructionSetData {
             classB.instructionPercent = classB.getRandomPercentage(LOWER_BOUND, upperBound);
         }
 
-        const remainingPercent = MAX_PERCENT - (classA.instructionPercent + classB.instructionPercent);
+        const remainingPercent =
+            MAX_PERCENT - (classA.instructionPercent + classB.instructionPercent);
         classC.instructionPercent = remainingPercent;
     };
 
@@ -89,7 +90,11 @@ export class InstructionSet implements Problem, InstructionSetData {
         this.classB.clockCycles.checkUserAnswer(classB.clockCycles, this.classB);
 
         if (this.isClassCPresent) {
-            this.classC.instructionCount.checkUserAnswer(classC.instructionCount, this.classC, this);
+            this.classC.instructionCount.checkUserAnswer(
+                classC.instructionCount,
+                this.classC,
+                this
+            );
             this.classC.clockCycles.checkUserAnswer(classC.clockCycles, this.classC);
         }
     };

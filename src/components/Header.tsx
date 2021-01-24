@@ -6,7 +6,6 @@ import a11y from '../styles/Accessibility.css';
 import styles from '../styles/Header.css';
 import { OnClickEvent } from '../types/Events';
 
-
 interface NavItemProps {
     // Optional properties for mobile navigation only.
     tabIndex?: number;
@@ -16,14 +15,17 @@ interface NavItemProps {
 }
 
 const NavItem = (props: NavItemProps): ReactElement => {
-    return ( 
-            <li className={styles['nav__list-item']}>
-                <Link className={`${a11y.outline} ${styles.nav__link}`} 
-                        to={props.route} tabIndex={props.tabIndex}
-                        onClick={props.onEnterNewPage}>
-                                        {props.text} 
-                </Link>
-            </li>
+    return (
+        <li className={styles['nav__list-item']}>
+            <Link
+                className={`${a11y.outline} ${styles.nav__link}`}
+                to={props.route}
+                tabIndex={props.tabIndex}
+                onClick={props.onEnterNewPage}
+            >
+                {props.text}
+            </Link>
+        </li>
     );
 };
 
@@ -39,8 +41,7 @@ const TextLogo = (): ReactElement => {
 const HeaderButtons = (): ReactElement => {
     return (
         <div className={styles.header__right}>
-            <input className={`${a11y.outline} ${styles['light-bulb']}`} 
-                    type="checkbox" />
+            <input className={`${a11y.outline} ${styles['light-bulb']}`} type="checkbox" />
         </div>
     );
 };
@@ -52,9 +53,12 @@ interface MobileTogglerProps extends OnClickEvent {
 // Hamburger menu for mobile navigation.
 const MobileNavToggler = (props: MobileTogglerProps): ReactElement => {
     return (
-        <button aria-label={props.iconToggle ? "Close menu": "Open menu"}onClick={props.onClick}
-                            className={`${a11y.outline} ${styles['mobile-nav-toggler']}`}>
-                    <FontAwesomeIcon icon={props.iconToggle ? faTimes: faBars} />
+        <button
+            aria-label={props.iconToggle ? 'Close menu' : 'Open menu'}
+            onClick={props.onClick}
+            className={`${a11y.outline} ${styles['mobile-nav-toggler']}`}
+        >
+            <FontAwesomeIcon icon={props.iconToggle ? faTimes : faBars} />
         </button>
     );
 };
@@ -77,16 +81,19 @@ const Header = (props: HeaderProps): ReactElement => {
                     <div className={styles.header__left}>
                         <TextLogo />
                         <nav>
-                            <MobileNavToggler onClick={props.onClick}
-                                                    iconToggle={props.iconToggle} />
+                            <MobileNavToggler
+                                onClick={props.onClick}
+                                iconToggle={props.iconToggle}
+                            />
                             {/* Non-mobile navigation */}
                             <ul className={styles.nav__list}>
-                                {item.map((element, index) =>
-                                    <NavItem key={index} 
-                                                route={element.route} 
-                                                text={element.text} 
+                                {item.map((element, index) => (
+                                    <NavItem
+                                        key={index}
+                                        route={element.route}
+                                        text={element.text}
                                     />
-                                )}
+                                ))}
                             </ul>
                         </nav>
                     </div>
@@ -109,48 +116,54 @@ class MobileNavbar extends React.Component<{}, MobileNavbarState> {
     private navData = {
         item: [
             {
-                route: "/how-it-works",
-                text: "How it works",
+                route: '/how-it-works',
+                text: 'How it works',
             },
             {
-                route: "/practice",
-                text: "Practice",
+                route: '/practice',
+                text: 'Practice',
             },
             {
-                route: "/resources",
-                text: "Resources",
-            }
-        ]
+                route: '/resources',
+                text: 'Resources',
+            },
+        ],
     };
 
     toggleNavigation = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.stopPropagation();
 
         setTimeout(() => {
-            this.setState(prevState => ({
-                isToggled: !prevState.isToggled,
-            }), () => {
-                if (this.state.isToggled) {
-                    document.body.classList.add(styles['hide-scrollbar']);
-                } else {
-                    document.body.classList.remove(styles['hide-scrollbar']);
+            this.setState(
+                (prevState) => ({
+                    isToggled: !prevState.isToggled,
+                }),
+                () => {
+                    if (this.state.isToggled) {
+                        document.body.classList.add(styles['hide-scrollbar']);
+                    } else {
+                        document.body.classList.remove(styles['hide-scrollbar']);
+                    }
                 }
-            });
+            );
         }, 10);
     };
 
     removeMobileNavigation = (event: React.MouseEvent<HTMLAnchorElement>): void => {
         event.stopPropagation();
 
-        this.setState(prevState => ({
-            isToggled: !prevState.isToggled,
-        }), () => { 
-            if (this.state.isToggled) {
-                document.body.classList.add(styles['hide-scrollbar']);
-            } else {
-                document.body.classList.remove(styles['hide-scrollbar']);
+        this.setState(
+            (prevState) => ({
+                isToggled: !prevState.isToggled,
+            }),
+            () => {
+                if (this.state.isToggled) {
+                    document.body.classList.add(styles['hide-scrollbar']);
+                } else {
+                    document.body.classList.remove(styles['hide-scrollbar']);
+                }
             }
-        });
+        );
     };
 
     render(): ReactNode {
@@ -159,32 +172,30 @@ class MobileNavbar extends React.Component<{}, MobileNavbarState> {
 
         return (
             <>
-                <nav className={`${styles['mobile-nav']} 
-                                    ${(isToggled 
-                                        ? styles['mobile-nav--open'] 
-                                        : "")}`}
-                        aria-label="Mobile navigation">
+                <nav
+                    className={`${styles['mobile-nav']} 
+                                    ${isToggled ? styles['mobile-nav--open'] : ''}`}
+                    aria-label="Mobile navigation"
+                >
                     <ul className={styles['items-container']}>
                         {items.map((element, index) => {
-                                return <NavItem key={index}
-                                                    route={element.route}
-                                                    text={element.text}
-                                                    onEnterNewPage={this.removeMobileNavigation}
-                                                    tabIndex={isToggled ? 0 : -1} />;
+                            return (
+                                <NavItem
+                                    key={index}
+                                    route={element.route}
+                                    text={element.text}
+                                    onEnterNewPage={this.removeMobileNavigation}
+                                    tabIndex={isToggled ? 0 : -1}
+                                />
+                            );
                         })}
                         <HeaderButtons />
                     </ul>
                 </nav>
-                <Header item={items} 
-                            iconToggle={isToggled}
-                            onClick={this.toggleNavigation} />
+                <Header item={items} iconToggle={isToggled} onClick={this.toggleNavigation} />
             </>
         );
     }
 }
-
-
-
-
 
 export default MobileNavbar;

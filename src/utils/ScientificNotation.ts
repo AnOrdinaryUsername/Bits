@@ -1,7 +1,7 @@
 /* Given the following form in scientific notation:
-*                   m * 10^n
-*           m = significand , n = exponent
-*/
+ *                   m * 10^n
+ *           m = significand , n = exponent
+ */
 interface ScientificNotation {
     significand: number;
     exponent: number;
@@ -20,9 +20,11 @@ class ScientificNotationConverter {
     // Convert a decimal number to scientific notation
     // E.g. convertToScientificNotation(12345, 2) ====> "1.23e+4"
     // integerPart = decimal number to convert, fractionalPart = how many numbers to round off
-    private convertToScientificNotation = (integerPart: string | number,
-        fractionalPart: number): string => {
-        if (typeof integerPart === "number") {
+    private convertToScientificNotation = (
+        integerPart: string | number,
+        fractionalPart: number
+    ): string => {
+        if (typeof integerPart === 'number') {
             integerPart = integerPart.toString();
         }
 
@@ -37,12 +39,12 @@ class ScientificNotationConverter {
 
         // Start at the number after the decimal and stop at e
         // e.g. "1.23e+4" ==> look at "23" part
-        const start = resultWithMantissa.indexOf(".") + 1;
-        const stop = resultWithMantissa.indexOf("e");
+        const start = resultWithMantissa.indexOf('.') + 1;
+        const stop = resultWithMantissa.indexOf('e');
 
         // If it isn't "00" return 2 decimal places otherwise no decimal.
         for (let i = start; i < stop; ++i) {
-            if (resultWithMantissa[i] !== "0") {
+            if (resultWithMantissa[i] !== '0') {
                 return resultWithMantissa;
             }
         }
@@ -54,10 +56,10 @@ class ScientificNotationConverter {
     // Returns an object literal containing significand and exponent of a form in scientific notation.
     public generateForm = (decimal: number | string, fraction: number): ScientificNotation => {
         const convertedForm = this.convertToScientificNotation(decimal, fraction);
-        const stopSearch = convertedForm.indexOf("e");
+        const stopSearch = convertedForm.indexOf('e');
 
         // Grab all elements to the left of "e" and concatenate to significandString
-        let significandString = "";
+        let significandString = '';
         for (let i = 0; i < stopSearch; ++i) {
             significandString += convertedForm[i];
         }
@@ -71,7 +73,4 @@ class ScientificNotationConverter {
     };
 }
 
-export {
-    ScientificNotation,
-    ScientificNotationConverter,
-};
+export { ScientificNotation, ScientificNotationConverter };

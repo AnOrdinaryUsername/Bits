@@ -11,15 +11,14 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-
-module.exports = env => {
+module.exports = (env) => {
   const PRODUCTION = env.production;
   const NAME_MODE = PRODUCTION ? '[name].[contenthash]' : '[name]';
-  
+
   return {
     entry: './src/index.tsx',
-    devtool: (PRODUCTION) ? false : 'inline-source-map',
-    target: (PRODUCTION) ? 'browserslist' : 'web',
+    devtool: PRODUCTION ? false : 'inline-source-map',
+    target: PRODUCTION ? 'browserslist' : 'web',
     module: {
       rules: [
         // (PROD) MiniCssExtract for separate css files and lazy loading
@@ -30,17 +29,20 @@ module.exports = env => {
         {
           test: /\.css$/,
           use: [
-            { loader: (PRODUCTION) ?  MiniCssExtractPlugin.loader : 'style-loader' },
+            { loader: PRODUCTION ? MiniCssExtractPlugin.loader : 'style-loader' },
             { loader: '@teamsupercell/typings-for-css-modules-loader' },
             { loader: 'css-loader', options: { modules: true } },
-            { loader: 'postcss-loader', options: { postcssOptions: { plugins: [ autoprefixer ] } } },
-          ]
+            {
+              loader: 'postcss-loader',
+              options: { postcssOptions: { plugins: [autoprefixer] } },
+            },
+          ],
         },
         {
           test: /\.(tsx|ts)?$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
           },
         },
       ],
@@ -61,11 +63,11 @@ module.exports = env => {
       historyApiFallback: true,
       open: {
         app: [getChromeBrowser(), '--incognito'],
-      }
+      },
     },
     optimization: {
-      splitChunks: {   
-          chunks: 'all',
+      splitChunks: {
+        chunks: 'all',
       },
       minimizer: [
         new TerserPlugin({
@@ -77,7 +79,7 @@ module.exports = env => {
           extractComments: true,
         }),
         new CssMinimizerPlugin({
-          sourceMap: (PRODUCTION) ? false : true,
+          sourceMap: PRODUCTION ? false : true,
           minimizerOptions: {
             preset: [
               'default',
@@ -105,13 +107,14 @@ module.exports = env => {
         template: path.resolve(__dirname, 'src', 'index.html'),
         publicPath: '',
       }),
-      PRODUCTION && new BundleAnalyzerPlugin({
-        analyzerMode: 'disabled',
-        generateStatsFile: true,
-      }),
+      PRODUCTION &&
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'disabled',
+          generateStatsFile: true,
+        }),
       PRODUCTION && new CompressionPlugin(),
     ].filter(Boolean), // Remove any booleans in plugins.
-  }
+  };
 };
 
 function getChromeBrowser() {

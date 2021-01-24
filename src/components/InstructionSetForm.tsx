@@ -9,9 +9,8 @@ import { InputSubmit, InputText } from './InputsAndButtons';
 import { Question } from './Question';
 import { Table, TableBody, TableData, TableDataCell, TableHead, TableRow } from './Table';
 
-
 interface SetData {
-    dynamicInstructionCount: ScientificNotation
+    dynamicInstructionCount: ScientificNotation;
     clockRate: number;
     isClassCPresent: boolean;
 }
@@ -21,37 +20,34 @@ const createTemplate = (setObject: SetData): string => {
 
     const { significand, exponent } = dynamicInstructionCount;
 
-    const classList = isClassCPresent ? "A, B, and C" : "A and B";
-    const classCount = isClassCPresent ? "three" : "two";
+    const classList = isClassCPresent ? 'A, B, and C' : 'A and B';
+    const classCount = isClassCPresent ? 'three' : 'two';
 
-    return (`Suppose the implementation of an instruction 
+    return `Suppose the implementation of an instruction 
 set architecture uses ${classCount} classes of instructions: ${classList}. 
 The total dynamic instruction count is ${significand} x 10^${exponent} and the 
 processor's clock rate is ${clockRate} GHz. Details for the ${classCount} classes 
-are given in the table below:`);
+are given in the table below:`;
 };
-
 
 interface InstructionClassProps {
     classData: InstructionClassData[];
 }
 
 const TableReference = (props: InstructionClassProps): ReactElement => {
-    const headData= {
-        headStart: "Class",
-        headMiddle: "CPI",
-        headEnd: "% of Instructions",
+    const headData = {
+        headStart: 'Class',
+        headMiddle: 'CPI',
+        headEnd: '% of Instructions',
     };
 
     return (
         <Table class={anim['text-anim-2']}>
             <TableHead objectData={headData} />
             <TableBody>
-                {props.classData.map(element => {
+                {props.classData.map((element) => {
                     if (element.name) {
-                        return (
-                            <TableData key={uniqid()} objectData={element} />
-                        );
+                        return <TableData key={uniqid()} objectData={element} />;
                     }
                 })}
             </TableBody>
@@ -59,52 +55,57 @@ const TableReference = (props: InstructionClassProps): ReactElement => {
     );
 };
 
-
 const Directions = (): ReactElement => {
     return (
-        <p className={anim['text-anim-3']}>Complete the following table.
-            <strong> Express all answers in scientific notation and round to two decimal places, 
-                when needed.
+        <p className={anim['text-anim-3']}>
+            Complete the following table.
+            <strong>
+                {' '}
+                Express all answers in scientific notation and round to two decimal places, when
+                needed.
             </strong>
         </p>
     );
 };
 
 interface InputDataCellProps extends OnChangeEvent {
-    significandValue: string
+    significandValue: string;
     significandName: string;
     exponentValue: string;
     exponentName: string;
 }
 
 const InputDataCell = (props: InputDataCellProps): ReactElement => {
-    const scientificNotation = "x 10^";
+    const scientificNotation = 'x 10^';
 
     return (
         <TableDataCell hasChildren={true}>
-            <InputText name={props.significandName}
-                        value={props.significandValue} 
-                        onChange={props.onChange} />
+            <InputText
+                name={props.significandName}
+                value={props.significandValue}
+                onChange={props.onChange}
+            />
             <span>{scientificNotation}</span>
-            <InputText name={props.exponentName}
-                        value={props.exponentValue} 
-                        onChange={props.onChange} />
+            <InputText
+                name={props.exponentName}
+                value={props.exponentValue}
+                onChange={props.onChange}
+            />
         </TableDataCell>
-    )
+    );
 };
 
-interface InputTableProps extends  OnChangeEvent {
+interface InputTableProps extends OnChangeEvent {
     inputValuesAndNames: InstrSetState;
     setObject: InstructionSet;
 }
 
 const InputTable = (props: InputTableProps): ReactElement => {
     const headData = {
-        headStart: "Class",
-        headMiddle: "Instruction Count",
-        headEnd: "Number of Clock Cycles",
+        headStart: 'Class',
+        headMiddle: 'Instruction Count',
+        headEnd: 'Number of Clock Cycles',
     };
-
 
     const stateValue = props.inputValuesAndNames;
     const { classA, classB } = props.setObject;
@@ -113,117 +114,123 @@ const InputTable = (props: InputTableProps): ReactElement => {
         <Table class={anim['text-anim-4']}>
             <TableHead objectData={headData} />
             <TableBody>
-                    <TableRow>
-                        <TableDataCell text={classA.className} />
-                        <InputDataCell significandValue={stateValue.classAInstructionCountSignificand}
-                                        significandName="classAInstructionCountSignificand"
-                                        exponentValue={stateValue.classAInstructionCountExponent}
-                                        exponentName="classAInstructionCountExponent"
-                                        onChange={props.onChange} 
-                                        />
-                        <InputDataCell significandValue={stateValue.classAClockCyclesSignificand}
-                                        significandName="classAClockCyclesSignificand"
-                                        exponentValue={stateValue.classAClockCyclesExponent}
-                                        exponentName="classAClockCyclesExponent"
-                                        onChange={props.onChange}
-                                        />
-                    </TableRow>
-                    <TableRow>
-                        <TableDataCell text={classB.className} />
-                        <InputDataCell significandValue={stateValue.classBInstructionCountSignificand}
-                                        significandName="classBInstructionCountSignificand"
-                                        exponentValue={stateValue.classBInstructionCountExponent}
-                                        exponentName="classBInstructionCountExponent"
-                                        onChange={props.onChange}
-                                        />
-                        <InputDataCell significandValue={stateValue.classBClockCyclesSignificand}
-                                        significandName="classBClockCyclesSignificand"
-                                        exponentValue={stateValue.classBClockCyclesExponent}
-                                        exponentName="classBClockCyclesExponent"
-                                        onChange={props.onChange}
-                                        />
-                    </TableRow>
-                    { props.setObject.isClassCPresent &&
+                <TableRow>
+                    <TableDataCell text={classA.className} />
+                    <InputDataCell
+                        significandValue={stateValue.classAInstructionCountSignificand}
+                        significandName="classAInstructionCountSignificand"
+                        exponentValue={stateValue.classAInstructionCountExponent}
+                        exponentName="classAInstructionCountExponent"
+                        onChange={props.onChange}
+                    />
+                    <InputDataCell
+                        significandValue={stateValue.classAClockCyclesSignificand}
+                        significandName="classAClockCyclesSignificand"
+                        exponentValue={stateValue.classAClockCyclesExponent}
+                        exponentName="classAClockCyclesExponent"
+                        onChange={props.onChange}
+                    />
+                </TableRow>
+                <TableRow>
+                    <TableDataCell text={classB.className} />
+                    <InputDataCell
+                        significandValue={stateValue.classBInstructionCountSignificand}
+                        significandName="classBInstructionCountSignificand"
+                        exponentValue={stateValue.classBInstructionCountExponent}
+                        exponentName="classBInstructionCountExponent"
+                        onChange={props.onChange}
+                    />
+                    <InputDataCell
+                        significandValue={stateValue.classBClockCyclesSignificand}
+                        significandName="classBClockCyclesSignificand"
+                        exponentValue={stateValue.classBClockCyclesExponent}
+                        exponentName="classBClockCyclesExponent"
+                        onChange={props.onChange}
+                    />
+                </TableRow>
+                {props.setObject.isClassCPresent && (
                     <TableRow>
                         <TableDataCell text="C" />
-                        <InputDataCell significandValue={stateValue.classCInstructionCountSignificand}
-                                        significandName="classCInstructionCountSignificand"
-                                        exponentValue={stateValue.classCInstructionCountExponent}
-                                        exponentName="classCInstructionCountExponent"
-                                        onChange={props.onChange}
-                                        />
-                        <InputDataCell significandValue={stateValue.classCClockCyclesSignificand}
-                                        significandName="classCClockCyclesSignificand"
-                                        exponentValue={stateValue.classCClockCyclesExponent}
-                                        exponentName="classCClockCyclesExponent"
-                                        onChange={props.onChange} 
-                                        />
+                        <InputDataCell
+                            significandValue={stateValue.classCInstructionCountSignificand}
+                            significandName="classCInstructionCountSignificand"
+                            exponentValue={stateValue.classCInstructionCountExponent}
+                            exponentName="classCInstructionCountExponent"
+                            onChange={props.onChange}
+                        />
+                        <InputDataCell
+                            significandValue={stateValue.classCClockCyclesSignificand}
+                            significandName="classCClockCyclesSignificand"
+                            exponentValue={stateValue.classCClockCyclesExponent}
+                            exponentName="classCClockCyclesExponent"
+                            onChange={props.onChange}
+                        />
                     </TableRow>
-                    }
+                )}
             </TableBody>
         </Table>
     );
 };
 
 interface InstrSetState {
-    isSubmitted?: boolean
-    classAInstructionCountSignificand: string,
-    classAInstructionCountExponent: string,
-    classAClockCyclesSignificand: string,
-    classAClockCyclesExponent: string,
-    classBInstructionCountSignificand: string,
-    classBInstructionCountExponent: string,
-    classBClockCyclesSignificand: string,
-    classBClockCyclesExponent: string,
-    classCInstructionCountSignificand?: string,
-    classCInstructionCountExponent?: string,
-    classCClockCyclesSignificand?: string,
-    classCClockCyclesExponent?: string,
+    isSubmitted?: boolean;
+    classAInstructionCountSignificand: string;
+    classAInstructionCountExponent: string;
+    classAClockCyclesSignificand: string;
+    classAClockCyclesExponent: string;
+    classBInstructionCountSignificand: string;
+    classBInstructionCountExponent: string;
+    classBClockCyclesSignificand: string;
+    classBClockCyclesExponent: string;
+    classCInstructionCountSignificand?: string;
+    classCInstructionCountExponent?: string;
+    classCClockCyclesSignificand?: string;
+    classCClockCyclesExponent?: string;
 }
 
 export interface StateLiteralData {
     classA: {
-        instructionCount: ScientificNotation,
-        clockCycles: ScientificNotation,
-    },
+        instructionCount: ScientificNotation;
+        clockCycles: ScientificNotation;
+    };
     classB: {
-        instructionCount: ScientificNotation,
-        clockCycles: ScientificNotation,
-    },
+        instructionCount: ScientificNotation;
+        clockCycles: ScientificNotation;
+    };
     classC: {
-        instructionCount: ScientificNotation,
-        clockCycles: ScientificNotation,
-    }
+        instructionCount: ScientificNotation;
+        clockCycles: ScientificNotation;
+    };
 }
 
 export class InstructionSetForm extends React.Component<null, InstrSetState> {
     private problem: InstructionSet;
 
     constructor(props: null) {
-        super(props)
+        super(props);
         this.problem = new InstructionSet();
-    
+
         // nested state is bad kids
         this.state = {
             isSubmitted: false,
             // Class A Properties
-            classAInstructionCountSignificand: "",
-            classAInstructionCountExponent: "",
-            classAClockCyclesSignificand: "",
-            classAClockCyclesExponent: "",
+            classAInstructionCountSignificand: '',
+            classAInstructionCountExponent: '',
+            classAClockCyclesSignificand: '',
+            classAClockCyclesExponent: '',
             // Class B Properties
-            classBInstructionCountSignificand: "",
-            classBInstructionCountExponent: "",
-            classBClockCyclesSignificand: "",
-            classBClockCyclesExponent: "",
+            classBInstructionCountSignificand: '',
+            classBInstructionCountExponent: '',
+            classBClockCyclesSignificand: '',
+            classBClockCyclesExponent: '',
             // Optional Class C Properties
             ...(this.problem.isClassCPresent && {
-                classCInstructionCountSignificand: "",
-                classCInstructionCountExponent: "",
-                classCClockCyclesSignificand: "",
-                classCClockCyclesExponent: "",
-            })           
-        }
+                classCInstructionCountSignificand: '',
+                classCInstructionCountExponent: '',
+                classCClockCyclesSignificand: '',
+                classCClockCyclesExponent: '',
+            }),
+        };
     }
 
     createStateLiteral = (): StateLiteralData => {
@@ -237,7 +244,7 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
                 clockCycles: {
                     significand: Number(this.state.classAClockCyclesSignificand),
                     exponent: Number(this.state.classAClockCyclesExponent),
-                }
+                },
             },
             classB: {
                 instructionCount: {
@@ -247,9 +254,9 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
                 clockCycles: {
                     significand: Number(this.state.classBClockCyclesSignificand),
                     exponent: Number(this.state.classBClockCyclesExponent),
-                }
+                },
             },
-            ...(this.problem.isClassCPresent && { 
+            ...(this.problem.isClassCPresent && {
                 classC: {
                     instructionCount: {
                         significand: Number(this.state.classCInstructionCountSignificand),
@@ -258,9 +265,9 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
                     clockCycles: {
                         significand: Number(this.state.classCClockCyclesSignificand),
                         exponent: Number(this.state.classCClockCyclesExponent),
-                    }
-                }
-            })
+                    },
+                },
+            }),
         };
 
         return stateLiteral;
@@ -269,12 +276,14 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
     grabUserInput = (event: ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
 
-        this.setState(prevState => ({
-            ...prevState,
-            [name]: value,
-        }), () => console.log(`${name}: ${this.state[name]}`));
+        this.setState(
+            (prevState) => ({
+                ...prevState,
+                [name]: value,
+            }),
+            () => console.log(`${name}: ${this.state[name]}`)
+        );
     };
-    
 
     processInput = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -286,10 +295,14 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
         const userInputValues = this.createStateLiteral();
         this.problem.evaluateAnswer(userInputValues);
 
-        console.log("all good!");
+        console.log('all good!');
 
-        console.log(`classAInstructionCount is right? = ${this.problem.classA.instructionCount.answer.isRight}`);
-        console.log(`classAClockCycles is right? = ${this.problem.classA.clockCycles.answer.isRight}`);
+        console.log(
+            `classAInstructionCount is right? = ${this.problem.classA.instructionCount.answer.isRight}`
+        );
+        console.log(
+            `classAClockCycles is right? = ${this.problem.classA.clockCycles.answer.isRight}`
+        );
     };
 
     render(): ReactNode {
@@ -298,22 +311,24 @@ export class InstructionSetForm extends React.Component<null, InstrSetState> {
         const classes = [classA.grabData(), classB.grabData()];
 
         if (classC) {
-            classes.push(classC.grabData())
+            classes.push(classC.grabData());
         }
-        
+
         return (
             <FormBox onSubmit={this.processInput}>
-                <Question questionNumber="2" 
-                            text={createTemplate(this.problem)}>
-                     <TableReference classData={classes} />           
+                <Question questionNumber="2" text={createTemplate(this.problem)}>
+                    <TableReference classData={classes} />
                     <Directions />
-                    <InputTable inputValuesAndNames={this.state} 
-                                    setObject={this.problem}
-                                    onChange={this.grabUserInput} />
-                    {this.state.isSubmitted 
-                        ? <button>Next Question</button>
-                        : <InputSubmit value={"Submit"}/>
-                    }
+                    <InputTable
+                        inputValuesAndNames={this.state}
+                        setObject={this.problem}
+                        onChange={this.grabUserInput}
+                    />
+                    {this.state.isSubmitted ? (
+                        <button>Next Question</button>
+                    ) : (
+                        <InputSubmit value={'Submit'} />
+                    )}
                 </Question>
             </FormBox>
         );

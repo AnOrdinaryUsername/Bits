@@ -2,7 +2,6 @@ import React, { ReactElement, ReactNode } from 'react';
 import anim from '../styles/Animation.css';
 import styles from '../styles/Question.css';
 
-
 interface QuestionProps {
     children: ReactNode;
     questionNumber: string;
@@ -21,6 +20,4 @@ const Question = (props: QuestionProps): ReactElement => {
     );
 };
 
-export {
-    Question
-};
+export { Question };

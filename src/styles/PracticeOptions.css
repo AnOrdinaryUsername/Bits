@@ -1,10 +1,10 @@
 .fieldset__legend {
-    text-align: center;
+  text-align: center;
 }
 
 /* Blue line under legend */
 .fieldset__legend--blue::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 30%;
   bottom: 0;
@@ -37,7 +37,7 @@
   font-family: inherit;
   font-size: 16px;
   border-radius: 1.6rem;
-  box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+  box-shadow: 0 1px 3px hsla(0, 0%, 0%, 0.2);
   cursor: pointer;
   font-weight: 600;
 }
@@ -48,7 +48,7 @@
 }
 
 .checkbox__input:hover + .checkbox__label--blue {
-  background-color: hsl(204,65%, 89%);
+  background-color: hsl(204, 65%, 89%);
   color: hsl(224, 56%, 39%);
 }
 

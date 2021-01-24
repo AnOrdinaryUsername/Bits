@@ -8,14 +8,12 @@ const Loading = (): ReactElement => {
     let loadingIcon = null;
 
     if (reducedMotion) {
-        loadingIcon = <FontAwesomeIcon icon={faCircleNotch} 
-                                                className={styles['loading-svg']} />
+        loadingIcon = <FontAwesomeIcon icon={faCircleNotch} className={styles['loading-svg']} />;
     } else {
-        loadingIcon = <FontAwesomeIcon icon={faCircleNotch} 
-                                                className={styles['loading-svg']} 
-                                                spin />
+        loadingIcon = (
+            <FontAwesomeIcon icon={faCircleNotch} className={styles['loading-svg']} spin />
+        );
     }
-
 
     return (
         <div className={styles['loading-container']}>
@@ -25,7 +23,4 @@ const Loading = (): ReactElement => {
     );
 };
 
-export {
-    Loading
-};
-
+export { Loading };
