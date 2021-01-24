@@ -12,16 +12,19 @@ interface InputTextProps extends OnChangeEvent {
 }
 
 const InputText = (props: InputTextProps): ReactElement => {
-    return <input onChange={props.onChange}
-                    name={props.name}
-                    value={props.value}
-                    pattern="^\d*(\.\d{0,2})?$" // Regex to allow numbers with 2 optional decimal places.
-                    title="Please enter numbers only."  // Message when non-numeric chars are entered.
-                    className={`${a11y.outline} ${styles['input-text']}`} 
-                    type="text" 
-                    autoComplete="off"
-                    required
-            />
+    return (
+        <input
+            onChange={props.onChange}
+            name={props.name}
+            value={props.value}
+            pattern="^\d*(\.\d{0,2})?$" // Regex to allow numbers with 2 optional decimal places.
+            title="Please enter numbers only." // Message when non-numeric chars are entered.
+            className={`${a11y.outline} ${styles['input-text']}`}
+            type="text"
+            autoComplete="off"
+            required
+        />
+    );
 };
 
 interface InputSubmitProps {
@@ -29,15 +32,14 @@ interface InputSubmitProps {
 }
 
 const InputSubmit = (props: InputSubmitProps): ReactElement => {
-    return <input name="Submit"
-                    value={props.value}
-                    className={`${styles['input-submit']}`}
-                    type="submit"
-            />
+    return (
+        <input
+            name="Submit"
+            value={props.value}
+            className={`${styles['input-submit']}`}
+            type="submit"
+        />
+    );
 };
 
-export {
-    InputText,
-    InputTextProps,
-    InputSubmit,
-};
+export { InputText, InputTextProps, InputSubmit };

@@ -1,7 +1,5 @@
 {
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
@@ -16,17 +14,10 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "target": "es2016",
-    "lib": [
-      "es2017",
-      "dom",
-      "ScriptHost"
-    ],
+    "lib": ["es2017", "dom", "ScriptHost"],
     "jsx": "react",
     "allowJs": true,
-    "noEmit": true,
+    "noEmit": true
   },
-  "exclude": [
-    "dist",
-    "node_modules",
-  ],
+  "exclude": ["dist", "node_modules"]
 }

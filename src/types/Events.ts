@@ -16,9 +16,4 @@ interface OnToggleEvent {
     onToggle: (event: React.MouseEvent<MouseEvent>) => void;
 }
 
-export {
-    OnClickEvent,
-    OnChangeEvent,
-    OnSubmitEvent,
-    OnToggleEvent,
-};
+export { OnClickEvent, OnChangeEvent, OnSubmitEvent, OnToggleEvent };

@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 import uniqid from 'uniqid';
 import styles from '../styles/Table.css';
 
-
 interface TableChildrenProps {
     children: React.ReactNode;
     class?: string;
@@ -10,12 +9,8 @@ interface TableChildrenProps {
 }
 
 const TableRow = (props: TableChildrenProps): ReactElement => {
-    return (
-        <tr className={`${props.inTableHead ? "" : styles.table__row}`}>
-            {props.children}
-        </tr>
-    );
-}
+    return <tr className={`${props.inTableHead ? '' : styles.table__row}`}>{props.children}</tr>;
+};
 
 interface TableTextProps {
     text: string;
@@ -23,7 +18,7 @@ interface TableTextProps {
 
 const TableHeaderCell = (props: TableTextProps): ReactElement => {
     return <th className={styles['table__header-cell']}>{props.text}</th>;
-}
+};
 
 interface TableDataCellProps extends Partial<TableTextProps> {
     hasChildren?: boolean;
@@ -38,7 +33,6 @@ const TableDataCell = (props: TableDataCellProps): ReactElement => {
     return <td className={styles.table__cell}>{props.text}</td>;
 };
 
-
 interface TableDataProps {
     objectData: { [key: string]: string };
 }
@@ -49,20 +43,16 @@ const TableHead = (props: TableDataProps): ReactElement => {
     return (
         <thead>
             <TableRow inTableHead={true}>
-                {data.map(element => 
+                {data.map((element) => (
                     <TableHeaderCell key={uniqid()} text={element}></TableHeaderCell>
-                )}
+                ))}
             </TableRow>
         </thead>
     );
 };
 
 const TableBody = (props: TableChildrenProps): ReactElement => {
-    return (
-        <tbody>
-            {props.children}
-        </tbody>
-    );
+    return <tbody>{props.children}</tbody>;
 };
 
 const TableData = (props: TableDataProps): ReactElement => {
@@ -70,28 +60,19 @@ const TableData = (props: TableDataProps): ReactElement => {
 
     return (
         <TableRow class={styles.table__row}>
-            {data.map(element =>
-                    <TableDataCell key={uniqid()} text={element}></TableDataCell>
-            )}
+            {data.map((element) => (
+                <TableDataCell key={uniqid()} text={element}></TableDataCell>
+            ))}
         </TableRow>
-    )
+    );
 };
 
 const Table = (props: TableChildrenProps): ReactElement => {
     return (
         <div className={`${styles['table-container']} ${props.class}`}>
-            <table className={styles.table}>
-                {props.children}
-            </table>
+            <table className={styles.table}>{props.children}</table>
         </div>
     );
 };
 
-export {
-    Table,
-    TableBody,
-    TableHead,
-    TableRow,
-    TableDataCell,
-    TableData
-};
+export { Table, TableBody, TableHead, TableRow, TableDataCell, TableData };

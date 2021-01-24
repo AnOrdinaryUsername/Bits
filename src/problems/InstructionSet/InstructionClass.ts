@@ -35,11 +35,11 @@ export class InstructionClass {
     };
 
     public grabData = (): InstructionClassData => {
-        return ({
+        return {
             name: this.className,
             cpi: this.cpi.toString(),
-            instructionPercent: this.instructionPercent.toString() + "%",
-        });
+            instructionPercent: this.instructionPercent.toString() + '%',
+        };
     };
 
     public get instructionCount(): InstructionCountAnswer {

@@ -5,15 +5,22 @@ import styles from '../styles/Background.css';
 const BackgroundSvg = () => {
     return (
         <div className={styles['svg-wrapper']}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" height="400"
-                 preserveAspectRatio="none">
-                <path fill="hsl(209, 75%, 20%)" fillOpacity="1" d="M0,128L288,160L576,96L864,192L1152,128L1440,
-                        64L1440,320L1152,320L864,320L576,320L288,320L0,320Z">
-                </path>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+                height="400"
+                preserveAspectRatio="none"
+            >
+                <path
+                    fill="hsl(209, 75%, 20%)"
+                    fillOpacity="1"
+                    d="M0,128L288,160L576,96L864,192L1152,128L1440,
+                        64L1440,320L1152,320L864,320L576,320L288,320L0,320Z"
+                ></path>
             </svg>
         </div>
     );
-}
+};
 
 interface BackgroundProps {
     children: React.ReactNode;

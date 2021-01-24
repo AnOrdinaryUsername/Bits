@@ -12,12 +12,17 @@ interface CheckboxButtonProps {
 const CheckboxButton = (props: CheckboxButtonProps): ReactElement => {
     return (
         <React.Fragment>
-            <input type="checkbox" name="practice-problem"
-                value={props.buttonValue} id={props.buttonId}
-                className={styles.checkbox__input}>
-            </input>
-            <label htmlFor={props.buttonId}
-                className={`${styles.checkbox__label} ${styles['checkbox__label--blue']}`}>
+            <input
+                type="checkbox"
+                name="practice-problem"
+                value={props.buttonValue}
+                id={props.buttonId}
+                className={styles.checkbox__input}
+            ></input>
+            <label
+                htmlFor={props.buttonId}
+                className={`${styles.checkbox__label} ${styles['checkbox__label--blue']}`}
+            >
                 {props.buttonName}
             </label>
         </React.Fragment>
@@ -34,7 +39,7 @@ const Options = () => {
             <CheckboxButton buttonValue="" buttonId="section-4.4" buttonName="Section 4.4" />
             <CheckboxButton buttonValue="" buttonId="section-4.5" buttonName="Section 4.5" />
         </div>
-    )
+    );
 };
 
 interface LegendProps {

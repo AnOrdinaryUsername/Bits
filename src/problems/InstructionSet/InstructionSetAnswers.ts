@@ -3,7 +3,6 @@ import { ScientificNotation, ScientificNotationConverter } from '../../utils/Sci
 import { InstructionClass } from './InstructionClass';
 import { InstructionSet } from './InstructionSet';
 
-
 interface Solutions {
     userSolution: ScientificNotation;
     actualSolution: ScientificNotation;
@@ -42,7 +41,7 @@ export class InstructionCountAnswer implements Result, Solutions {
 
         // Convert scientific notation to decimal notation for calculations
         const { significand, exponent } = setObject.dynamicInstructionCount;
-        const decimalDynamicInstructionCount = significand * (BASE ** exponent)
+        const decimalDynamicInstructionCount = significand * BASE ** exponent;
 
         const decimalInstructionCount = decimalDynamicInstructionCount * decimalPercent;
 
@@ -50,8 +49,11 @@ export class InstructionCountAnswer implements Result, Solutions {
         this.actualSolution = converter.generateForm(decimalInstructionCount, ROUND_AMOUNT);
     };
 
-    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,
-        setObject: InstructionSet): void => {
+    public checkUserAnswer = (
+        userInput: ScientificNotation,
+        classObject: InstructionClass,
+        setObject: InstructionSet
+    ): void => {
         this.createSolution(classObject, setObject);
 
         this.userSolution = userInput;
@@ -65,7 +67,6 @@ export class InstructionCountAnswer implements Result, Solutions {
         }
     };
 }
-
 
 export class ClockCyclesAnswer implements Result, Solutions {
     public answer: {
@@ -96,14 +97,17 @@ export class ClockCyclesAnswer implements Result, Solutions {
         const BASE = 10;
         const ROUND_AMOUNT = 2;
 
-        const decimalInstructionCount = significand * (BASE ** exponent);
+        const decimalInstructionCount = significand * BASE ** exponent;
         const decimalClockCycles = decimalInstructionCount * instrObject.cpi;
 
         const converter = new ScientificNotationConverter();
         this.actualSolution = converter.generateForm(decimalClockCycles, ROUND_AMOUNT);
     };
 
-    public checkUserAnswer = (userInput: ScientificNotation, classObject: InstructionClass,): void => {
+    public checkUserAnswer = (
+        userInput: ScientificNotation,
+        classObject: InstructionClass
+    ): void => {
         this.createSolution(classObject);
 
         this.userSolution = userInput;
